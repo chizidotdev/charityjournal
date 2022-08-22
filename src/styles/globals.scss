@@ -56,4 +56,15 @@ picture {
   border: 0;
 }
 
+.btn-primary {
+  // color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(40, 179, 166, 1);
+
+  &:hover {
+    background-color: rgba(40, 179, 166, 1);
+    color: #fff;
+  }
+}
+
 @import 'navbar';

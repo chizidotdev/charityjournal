@@ -24,10 +24,13 @@ import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const [searchActive, setSearchActive] = useState(false);
+  const router = useRouter();
+
   return (
     <>
       <header className='container '>
@@ -70,10 +73,7 @@ export default function Navbar() {
                   <Avatar size={'sm'} src='' />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  <MenuItem>Link 2</MenuItem>
-                  <MenuDivider />
-                  <MenuItem>Link 3</MenuItem>
+                  <MenuItem onClick={() => router.push('/api/login')}>Login</MenuItem>
                 </MenuList>
               </Menu>
             </div>
