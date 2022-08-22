@@ -16,7 +16,6 @@ import { NavItem, NAV_ITEMS } from './navItems';
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
   const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
@@ -28,18 +27,16 @@ const DesktopNav = () => {
               <Link
                 px={5}
                 fontSize={'sm'}
-                fontWeight={500}
                 color={linkColor}
                 _hover={{
                   textDecoration: 'none',
-                  color: linkHoverColor,
                 }}
               >
-                {navItem.label}
+                <span className='nav-link'>{navItem.label}</span>
               </Link>
             </PopoverTrigger>
 
-            {navItem.children && (
+            {/* {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
@@ -54,7 +51,7 @@ const DesktopNav = () => {
                   ))}
                 </Stack>
               </PopoverContent>
-            )}
+            )} */}
           </Popover>
         </NavLink>
       ))}

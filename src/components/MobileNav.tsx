@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
 import {
   Stack,
   useColorModeValue,
@@ -8,6 +8,9 @@ import {
   Collapse,
   Link,
   Text,
+  Divider,
+  Center,
+  Input,
 } from '@chakra-ui/react';
 import { NAV_ITEMS, NavItem } from './navItems';
 
@@ -17,6 +20,17 @@ const MobileNav = () => {
       {NAV_ITEMS.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
+      <div className='flex items-center'>
+        <div className='w-full'>
+          <Input />
+        </div>
+        <Center height='30px' mx={'4'}>
+          <Divider orientation='vertical' color={'#000'} />
+        </Center>
+        <SearchIcon className='cursor-pointer' />
+      </div>
+      <Divider />
+      <MobileNavItem label='Login' href='/api/login' />
     </Stack>
   );
 };
@@ -39,7 +53,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
           {label}
         </Text>
-        {children && (
+        {/* {children && (
           <Icon
             as={ChevronDownIcon}
             transition={'all .25s ease-in-out'}
@@ -47,10 +61,10 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
             w={6}
             h={6}
           />
-        )}
+        )} */}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      {/* <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
         <Stack
           mt={2}
           pl={4}
@@ -66,7 +80,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
               </Link>
             ))}
         </Stack>
-      </Collapse>
+      </Collapse> */}
     </Stack>
   );
 };

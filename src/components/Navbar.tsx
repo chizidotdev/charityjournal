@@ -16,6 +16,8 @@ import {
   MenuItem,
   MenuList,
   Divider,
+  Input,
+  Center,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import DesktopNav from './DesktopNav';
@@ -29,7 +31,7 @@ export default function Navbar() {
   return (
     <>
       <header className='container '>
-        <div className='flex items-center justify-between py-5'>
+        <div className='flex items-center justify-between py-3'>
           <div className='block md:hidden'>
             <IconButton
               onClick={onToggle}
@@ -39,7 +41,7 @@ export default function Navbar() {
             />
           </div>
 
-          <div className='w-28 h-8 sm:w-36 sm:h-10 relative'>
+          <div className='w-28 h-8 sm:w-32 sm:h-9 relative'>
             <Image alt='' src='/charity.png' layout='fill' priority />
           </div>
 
@@ -83,8 +85,17 @@ export default function Navbar() {
         </Collapse>
       </header>
       <Divider />
-      <div className='container hidden md:block mt-5'>
+      <div className='container hidden md:flex items-center justify-between mt-5'>
         <DesktopNav />
+        <div className='flex items-center'>
+          <div className={`${searchActive && 'active'} search-bar overflow-hidden`}>
+            <Input onBlur={() => setSearchActive(false)} />
+          </div>
+          <Center height='30px' mx={'10'}>
+            <Divider orientation='vertical' color={'#000'} />
+          </Center>
+          <SearchIcon className='cursor-pointer' onClick={() => setSearchActive((prev) => !prev)} />
+        </div>
       </div>
     </>
   );

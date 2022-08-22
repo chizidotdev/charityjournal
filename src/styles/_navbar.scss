@@ -1,0 +1,36 @@
+.nav-link {
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    font-weight: 700;
+    color: #000;
+
+    &:after {
+      width: 100%;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: #000;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.search-bar {
+  transition: all 0.3s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: right;
+
+  &.active {
+    transform: scaleX(1);
+  }
+}

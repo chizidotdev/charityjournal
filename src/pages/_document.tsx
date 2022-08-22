@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
-          href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700;900&family=Mulish:wght@200;400;700;900&display=swap'
           rel='stylesheet'
         />
       </Head>
