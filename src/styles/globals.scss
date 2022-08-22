@@ -6,11 +6,6 @@ html {
   scroll-behavior: smooth;
 }
 
-h1,
-h2 {
-  font-family: 'Montserrat', sans-serif;
-}
-
 a,
 p {
   font-family: 'Mulish', sans-serif;
@@ -67,4 +62,44 @@ picture {
   }
 }
 
+.heading-1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 3rem);
+  line-height: 50px;
+}
+
+.heading-2-sm {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  // font-size: clamp(40px, 8vw, 48px);
+  font-size: 24px;
+  // line-height: 24px;
+}
+
+.caption {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.overlay {
+  position: relative;
+  & * {
+    z-index: 1;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 0;
+  }
+}
+
 @import 'navbar';
+@import 'home';
