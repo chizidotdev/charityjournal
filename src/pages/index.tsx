@@ -1,38 +1,44 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
-import { trpc } from '../utils/trpc';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+// import { trpc } from '../utils/trpc';
+// import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Home: NextPage = () => {
-  const hello = trpc.useQuery(['example.hello', { text: 'Chizi the dev' }]);
+  // const posts = trpc.useQuery(['post.getAllPosts']);
+  // const deletePost = trpc.useMutation(['post.deletePost']);
+  // const { data: session } = useSession();
 
-  // const question = trpc.useQuery(['question.getSession']);
-
-  const { data: session, status } = useSession();
-
-  return (
-    <>
-      <Head>
-        <title>Charity Journal</title>
-        {/* <meta name='description' content='' /> */}
-        {/* <link rel='icon' href='/favicon.ico' /> */}
-      </Head>
-
-      <main className='container mx-auto flex flex-col items-center justify-center min-h-screen p-4'>
-        <div className='pt-6 text-2xl text-blue-500 flex justify-center items-center w-full'>
-          {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
-        </div>
-        <div className='pt-6 text-2xl text-blue-500 flex justify-center items-center w-full'>
-          {status === 'authenticated' ? (
-            <p>Signed in as {session.user?.id}</p>
-          ) : (
-            <Link href='/api/auth/signin'>Sign in</Link>
-          )}
-        </div>
-      </main>
-    </>
-  );
+  return <div className='w-full'></div>;
 };
 
 export default Home;
+
+// Signed in as {session.user?.name} 🤭 ❤
+
+// return (
+//   <>
+//     {session ? (
+//       <Button onClick={() => signOut()}>Sign out</Button>
+//     ) : (
+//       <Button onClick={() => signIn()}>Sign in</Button>
+//     )}
+
+//     <div className='my-10'>
+//       {posts.isLoading ? (
+//         <div>Loading...</div>
+//       ) : (
+//         posts.data?.map((post) => (
+//           <div key={post.id} className='mb-5'>
+//             <Flex justifyContent='space-between'>
+//               <p>{post.title}</p>
+//               <Button onClick={() => deletePost.mutate({ postId: post.id })}>&times;</Button>
+//             </Flex>
+//             <li>{post.content}</li>
+//           </div>
+//         ))
+//       )}
+//     </div>
+//     <Link href='/create-post'>
+//       <Button>Create Post</Button>
+//     </Link>
+//   </>
+// );
