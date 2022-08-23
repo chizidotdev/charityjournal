@@ -23,7 +23,6 @@ const Trending: React.FC<TrendingProps> = ({ title }) => {
 
       <Content />
       <Content />
-      <Content />
     </div>
   );
 };

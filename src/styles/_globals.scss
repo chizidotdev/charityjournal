@@ -2,6 +2,7 @@
 $clr-pri: #b1c240;
 $clr-pri-b: #1db3a6;
 $clr-black: #373435;
+$clr-white: #fff;
 
 .bg-pri {
   background-color: $clr-black;
@@ -104,6 +105,59 @@ picture {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
   font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+}
+
+.link {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 1px;
+    background-color: $clr-black;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover {
+    color: $clr-black;
+    opacity: 0.8;
+
+    &::after {
+      background-color: $clr-black;
+    }
+  }
+}
+
+.link-white {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 1px;
+    background-color: $clr-white;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover {
+    opacity: 0.6;
+
+    &::after {
+      background-color: $clr-white;
+    }
+  }
 }
 
 .overlay {

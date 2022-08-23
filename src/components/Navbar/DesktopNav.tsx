@@ -21,22 +21,22 @@ const DesktopNav = () => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
-        <NavLink href={navItem.href ?? '/'} key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                px={5}
-                fontSize={'sm'}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                }}
-              >
-                <span className='nav-link'>{navItem.label}</span>
-              </Link>
-            </PopoverTrigger>
+        <Popover trigger={'hover'} placement={'bottom-start'} key={navItem.label}>
+          <PopoverTrigger>
+            <Link
+              px={5}
+              fontSize={'sm'}
+              color={linkColor}
+              _hover={{
+                textDecoration: 'none',
+              }}
+              href={navItem.href || '/'}
+            >
+              <span className='nav-link'>{navItem.label}</span>
+            </Link>
+          </PopoverTrigger>
 
-            {/* {navItem.children && (
+          {/* {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
@@ -52,8 +52,7 @@ const DesktopNav = () => {
                 </Stack>
               </PopoverContent>
             )} */}
-          </Popover>
-        </NavLink>
+        </Popover>
       ))}
     </Stack>
   );

@@ -45,29 +45,18 @@
   }
 }
 
-.link {
-  color: #000;
+.sidebar_card {
+  overflow: hidden;
+  background-color: $clr-black;
+  color: $clr-white;
+
+  border-radius: 10px;
   position: relative;
-  transition: all 0.2s ease-in;
+  height: 25rem;
 
-  &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    border-radius: inherit;
-    width: 100%;
-    height: 1px;
-    background-color: #000;
-    transition: all 0.2s ease-in;
-  }
-
-  &:hover {
-    color: $clr-black;
-    opacity: 0.8;
-
-    &::after {
-      background-color: $clr-black;
-    }
+  &-content {
+    z-index: 1;
+    background-color: $clr-pri-b;
+    border-radius: 10px;
   }
 }

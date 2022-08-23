@@ -52,12 +52,13 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <section className='flex my-16 gap-10'>
+      <section className=' flex my-16 gap-10'>
         <div>
           <Trending title='Featured' />
           <div className='py-10' />
           <Trending title='Most Recent' />
         </div>
+
         <div className='hidden lg:block w-2/5'>
           <SideBar />
         </div>
