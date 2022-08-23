@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn-pri {
+    @apply py-[10px] px-5 bg-[#1db3a6] hover:bg-opacity-70 transition duration-150 ease-in-out rounded-md text-white font-bold text-sm focus:outline-none;
+  }
+}
+
+@import 'globals';
+@import 'navbar';
+@import 'home';
