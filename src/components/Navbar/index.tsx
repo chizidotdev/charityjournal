@@ -18,6 +18,7 @@ import MobileNav from './MobileNav';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -37,12 +38,15 @@ export default function Navbar() {
             />
           </div>
 
-          <div className='w-28 h-8 md:w-36 md:h-10 relative'>
-            <Image alt='' src='/charity.png' layout='fill' priority />
-          </div>
+          <Link href='/'>
+            <div className='w-28 h-8 md:w-36 md:h-10 relative'>
+              <Image alt='' src='/charity.png' layout='fill' priority />
+            </div>
+          </Link>
 
           <div className='flex items-center gap-5'>
-            <button className='btn-pri text-base'>Subscribe</button>
+            <button className='sm:hidden link-hover text-base mt-1'>Subscribe</button>
+            <button className='hidden sm:block btn-pri text-base'>Subscribe</button>
             <div className='hidden sm:block'>
               <Menu>
                 <MenuButton
@@ -55,7 +59,7 @@ export default function Navbar() {
                   <Avatar size={'sm'} src='' />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem onClick={() => router.push('/api/login')}>Login</MenuItem>
+                  <MenuItem onClick={() => router.push('/api/auth/signin')}>Login</MenuItem>
                 </MenuList>
               </Menu>
             </div>

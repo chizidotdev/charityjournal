@@ -23,14 +23,13 @@ const Trending: React.FC<TrendingProps> = ({ title }) => {
 
       <Content />
       <Content />
-      <Content />
     </div>
   );
 };
 
 const Content = () => {
   return (
-    <div className='flex flex-col md:flex-row justify-between gap-6 lg:gap-10 pt-5 lg:pt-10'>
+    <div className='flex flex-col md:flex-row justify-between gap-6 lg:gap-10 pt-10 lg:pt-10'>
       <div className='relative self-center w-full md:w-2/6 h-56 rounded-md overflow-hidden'>
         <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
       </div>

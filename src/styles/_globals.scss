@@ -2,6 +2,7 @@
 $clr-pri: #b1c240;
 $clr-pri-b: #1db3a6;
 $clr-black: #373435;
+$clr-white: #fff;
 
 .bg-pri {
   background-color: $clr-black;
@@ -43,11 +44,11 @@ picture {
 }
 
 .container {
-  padding-inline: 1em;
+  padding-inline: 1.5em;
   max-width: 80rem;
   margin-inline: auto;
 
-  @media screen and (min-width: 48rem) {
+  @media screen and (min-width: 640px) {
     padding-inline: 4em;
   }
 }
@@ -92,6 +93,14 @@ picture {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 22px;
+  line-height: 1.875rem;
+}
+
+.heading-4 {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .caption {
@@ -106,19 +115,72 @@ picture {
   font-size: clamp(0.75rem, 2.5vw, 0.875rem);
 }
 
-.overlay {
+.link {
+  cursor: pointer;
   position: relative;
-  & * {
-    z-index: 1;
-  }
+  transition: all 0.2s ease-in;
+
   &::after {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    bottom: 0;
     border-radius: inherit;
     width: 100%;
-    height: 100%;
+    height: 1px;
+    background-color: $clr-black;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover {
+    color: $clr-black;
+    opacity: 0.8;
+
+    &::after {
+      background-color: $clr-black;
+    }
+  }
+}
+
+.link-white {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 1px;
+    background-color: $clr-white;
+    transition: all 0.2s ease-in;
+  }
+
+  &:hover {
+    opacity: 0.6;
+
+    &::after {
+      background-color: $clr-white;
+    }
+  }
+}
+
+.link-animate {
+  position: relative;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: inherit;
+    width: 100%;
+    height: 1px;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 0;
   }
