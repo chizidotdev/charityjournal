@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*======= Custom Colors =======*/
+$clr-pri: #b1c240;
+$clr-pri-b: #1db3a6;
+$clr-black: #373435;
+
+.bg-pri {
+  background-color: $clr-black;
+}
+
+.text-pri {
+  color: #373435;
+}
+
+.text-sec {
+  color: #b1c240;
+}
 
 html {
   scroll-behavior: smooth;
@@ -65,22 +78,32 @@ picture {
 .heading-1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: clamp(2.5rem, 8vw, 3rem);
-  line-height: 50px;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: clamp(2.5rem, 4vw, 4rem);
+}
+
+.heading-2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
 }
 
 .heading-2-sm {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  // font-size: clamp(40px, 8vw, 48px);
-  font-size: 24px;
-  // line-height: 24px;
+  font-size: 22px;
 }
 
 .caption {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: clamp(14px, 2.5vw, 20px);
+}
+
+.caption-sm {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
 }
 
 .overlay {
@@ -100,6 +123,3 @@ picture {
     z-index: 0;
   }
 }
-
-@import 'navbar';
-@import 'home';

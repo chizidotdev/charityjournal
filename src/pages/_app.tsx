@@ -4,7 +4,7 @@ import type { AppRouter } from '../server/router';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
-import '../styles/globals.scss';
+import '../styles/main.scss';
 import { ChakraProvider } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import Head from 'next/head';
@@ -15,9 +15,9 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
       <SessionProvider session={session}>
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-          <title>Charity Journal</title>
-          <meta name='description' content='Charity Journal' />
-          <link rel='icon' href='/favicon.ico' />
+          <title>Charity Journal | Telling the story of good deeds</title>
+          <meta name='description' content='Charity Journal | Telling the story of good deeds' />
+          <link rel='icon' href='/logob-sec.png' />
         </Head>
         <Navbar />
 
