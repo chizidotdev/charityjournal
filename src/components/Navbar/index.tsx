@@ -28,7 +28,7 @@ export default function Navbar() {
     <>
       <header className='container '>
         <div className='flex items-center justify-between py-3'>
-          <div className='block md:hidden'>
+          <div className='block lg:hidden'>
             <IconButton
               onClick={onToggle}
               icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
@@ -37,7 +37,7 @@ export default function Navbar() {
             />
           </div>
 
-          <div className='w-28 h-8 sm:w-32 sm:h-9 relative'>
+          <div className='w-28 h-8 md:w-36 md:h-10 relative'>
             <Image alt='' src='/charity.png' layout='fill' priority />
           </div>
 
@@ -67,7 +67,7 @@ export default function Navbar() {
         </Collapse>
       </header>
       <Divider />
-      <div className='container hidden md:flex items-center justify-between mt-5'>
+      <div className='container hidden lg:flex items-center justify-between mt-5'>
         <DesktopNav />
         <div className='flex items-center'>
           <div className={`${searchActive && 'active'} search-bar overflow-hidden`}>
