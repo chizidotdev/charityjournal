@@ -28,10 +28,7 @@ export const NewsletterCard: React.FC<SidebarCardProps> = ({}) => {
   return (
     <div className='sidebar_card w-full p-10 flex flex-col items-center justify-center gap-5 text-center'>
       <h1 className='heading-2-sm capitalize text-center'>subscribe to the newsletter</h1>
-      <p className='caption-sm'>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+      <p className='caption-sm'>Sign up to get email notifications on the latest charity news.</p>
       <div>
         <Input
           _focusVisible={{}}

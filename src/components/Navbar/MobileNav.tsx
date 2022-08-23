@@ -30,7 +30,7 @@ const MobileNav = () => {
         <SearchIcon className='cursor-pointer' />
       </div>
       <Divider />
-      <MobileNavItem label='Login' href='/api/login' />
+      <MobileNavItem label='Login' href='/api/auth/signin' />
     </Stack>
   );
 };

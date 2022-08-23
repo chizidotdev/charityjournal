@@ -44,11 +44,11 @@ picture {
 }
 
 .container {
-  padding-inline: 1em;
+  padding-inline: 1.5em;
   max-width: 80rem;
   margin-inline: auto;
 
-  @media screen and (min-width: 48rem) {
+  @media screen and (min-width: 640px) {
     padding-inline: 4em;
   }
 }
@@ -93,6 +93,14 @@ picture {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 22px;
+  line-height: 1.875rem;
+}
+
+.heading-4 {
+  font-family: 'Mulish', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
 }
 
 .caption {
@@ -160,19 +168,19 @@ picture {
   }
 }
 
-.overlay {
+.link-animate {
   position: relative;
-  & * {
-    z-index: 1;
-  }
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+
   &::after {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
+    bottom: 0;
     border-radius: inherit;
     width: 100%;
-    height: 100%;
+    height: 1px;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 0;
   }
