@@ -17,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
           <meta name='viewport' content='width=device-width, initial-scale=1.0' />
           <title>Charity Journal | Telling the story of good deeds</title>
           <meta name='description' content='Charity Journal | Telling the story of good deeds' />
-          <link rel='icon' href='/logo-sec.png' />
+          <link rel='icon' href='/logob-sec.png' />
         </Head>
         <Navbar />
 

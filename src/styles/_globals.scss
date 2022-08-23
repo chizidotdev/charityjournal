@@ -78,16 +78,20 @@ picture {
 .heading-1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  line-height: clamp(2.5rem, 8vw, 4rem);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  line-height: clamp(2.5rem, 4vw, 4rem);
+}
+
+.heading-2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 2rem);
 }
 
 .heading-2-sm {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  // font-size: clamp(40px, 8vw, 48px);
   font-size: 22px;
-  // line-height: 24px;
 }
 
 .caption {
@@ -99,7 +103,7 @@ picture {
 .caption-sm {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
-  font-size: clamp(0.75rem, 2.5vw, 1rem);
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
 }
 
 .overlay {

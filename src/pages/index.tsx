@@ -1,5 +1,7 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import SideBar from '../components/Sidebar';
+import Trending from '../components/Trending';
 // import { trpc } from '../utils/trpc';
 // import { signIn, signOut, useSession } from 'next-auth/react';
 
@@ -47,6 +49,17 @@ const Home: NextPage = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className='flex my-16 gap-10'>
+        <div>
+          <Trending title='Featured' />
+          <div className='py-10' />
+          <Trending title='Most Recent' />
+        </div>
+        <div className='hidden lg:block w-2/5'>
+          <SideBar />
         </div>
       </section>
     </div>

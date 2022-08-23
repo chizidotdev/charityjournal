@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       <header className='container '>
-        <div className='flex items-center justify-between py-3'>
+        <div className='flex items-center justify-between py-5'>
           <div className='block lg:hidden'>
             <IconButton
               onClick={onToggle}
@@ -42,7 +42,7 @@ export default function Navbar() {
           </div>
 
           <div className='flex items-center gap-5'>
-            <button className='btn-pri'>Subscribe</button>
+            <button className='btn-pri text-base'>Subscribe</button>
             <div className='hidden sm:block'>
               <Menu>
                 <MenuButton
@@ -66,7 +66,9 @@ export default function Navbar() {
           <MobileNav />
         </Collapse>
       </header>
-      <Divider />
+
+      <Divider borderColor='#d5d5d5' />
+
       <div className='container hidden lg:flex items-center justify-between mt-5'>
         <DesktopNav />
         <div className='flex items-center'>
