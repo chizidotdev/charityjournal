@@ -10,42 +10,40 @@ const Home: NextPage = () => {
 
   return (
     <div className='container my-10'>
-      <section className='flex gap-5'>
+      <section className='flex lg:gap-5'>
         <div className='flex charity-month'>
-          <div className='w-3/5 min-w-[280px]'>
-            <h1 className='heading-1 mb-5'>Charity Of The Month</h1>
-            <p className='caption'>
+          <div className='sm:w-3/4 min-w-[280px] sm:mr-[20%]'>
+            <h1 className='heading-1 mb-3 md:mb-5'>
+              Charity Of <br /> The Month
+            </h1>
+            <p className='caption mr-[20%]'>
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
               ea commodo consequat.
             </p>
           </div>
-          <div className='w-1/5'>
-            {/* <Image src='/unsplash.png' width={600} height={400} alt='' /> */}
-          </div>
+          {/* <div className='w-1/5 sm:block' /> */}
         </div>
 
         <div className='flex gap-5'>
-          <div className='feature-card hidden xl:flex flex-col w-64 min-w-[256px]'>
+          <div className='feature_card hidden xl:flex flex-col w-64 min-w-[256px]'>
             <div className='h-2/5'>
-              <Image src='/unsplash-1.png' width={500} height={300} alt='' />
+              <Image src='/unsplash.png' width={500} height={300} alt='' />
             </div>
-            <div className='p-5 bg-slate-50'>
+            <div className='feature_card-content p-5 text-white'>
               <h1 className='heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
-              <p className='caption'>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.
+              <p className='caption-sm'>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
               </p>
             </div>
           </div>
-          <div className='feature-card hidden lg:flex flex-col w-64 min-w-[256px]'>
+          <div className='feature_card hidden lg:flex flex-col w-64 min-w-[256px]'>
             <div className='h-2/5'>
-              <Image src='/unsplash-1.png' width={500} height={300} alt='' />
+              <Image src='/unsplash.png' width={500} height={300} alt='' />
             </div>
-            <div className='p-5 bg-slate-50'>
+            <div className='feature_card-content p-5 text-white'>
               <h1 className='heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
-              <p className='caption'>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat.
+              <p className='caption-sm'>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
               </p>
             </div>
           </div>
