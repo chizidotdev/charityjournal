@@ -3,7 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 
 // Prisma adapter for NextAuth, optional and can be removed
 // import { PrismaAdapter } from '@next-auth/prisma-adapter';
-// import { prisma } from '../../../server/db/client';
+import { prisma } from '../../../server/db/client';
 // import { env } from '../../../env/server.mjs';
 
 export const authOptions: NextAuthOptions = {
@@ -34,11 +34,12 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (credentials?.username === 'admin' && credentials.password === 'admin') {
-          const user = await prisma?.user.findUnique({
+          const user = await prisma.user.findUnique({
             where: {
-              name: credentials?.username,
+              name: credentials.username,
             },
           });
+
           if (user) {
             return user;
           }
@@ -50,6 +51,9 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  // pages: {
+  //   signIn: '/signin',
+  // },
 };
 
 export default NextAuth(authOptions);

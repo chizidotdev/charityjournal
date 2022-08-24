@@ -19,11 +19,15 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const [searchActive, setSearchActive] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
+
+  // console.log('session==========', session);
 
   return (
     <>
@@ -59,7 +63,11 @@ export default function Navbar() {
                   <Avatar size={'sm'} src='' />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem onClick={() => router.push('/api/auth/signin')}>Login</MenuItem>
+                  {session ? (
+                    <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                  ) : (
+                    <MenuItem onClick={() => router.push('/api/auth/signin')}>Login</MenuItem>
+                  )}
                 </MenuList>
               </Menu>
             </div>
