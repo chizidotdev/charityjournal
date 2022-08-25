@@ -35,16 +35,16 @@ export const Content = () => {
 
       <div className='w-full md:w-3/5 md:h-56 flex flex-col gap-2 pb-5'>
         <div className='flex items-center justify-between gap-6'>
-          <div className='flex items-center gap-5'>
-            <Divider width={10} borderColor='#d5d5d5' />
-            <span className='uppercase opacity-50 text-xs'>by John Doe</span>
-          </div>
-
           <span className='md:hidden md:mt-4 text-xs opacity-50 flex items-center gap-2'>
             <span>Aug 15</span>
             <Divider width={3} borderColor='#373435' />
             <span>5 min read</span>
           </span>
+
+          <div className='flex items-center gap-5'>
+            <Divider width={10} borderColor='#d5d5d5' />
+            <span className='uppercase opacity-50 text-xs'>by John Doe</span>
+          </div>
         </div>
 
         <h1 className='heading-2-sm'>

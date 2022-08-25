@@ -43,7 +43,7 @@ export default function Navbar() {
           </div>
 
           <Link href='/'>
-            <div className='w-28 h-8 md:w-36 md:h-10 relative'>
+            <div className='w-28 h-8 md:w-36 md:h-10 relative cursor-pointer'>
               <Image alt='' src='/charity.png' layout='fill' priority />
             </div>
           </Link>
