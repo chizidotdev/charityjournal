@@ -2,6 +2,7 @@
 $clr-pri: #b1c240;
 $clr-pri-b: #1db3a6;
 $clr-black: #373435;
+$clr-gray: #585757;
 $clr-white: #fff;
 
 .bg-pri {
@@ -63,6 +64,11 @@ picture {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.active {
+  // color: $clr-pri-b;
+  font-weight: 900;
 }
 
 .btn-primary {
@@ -168,10 +174,17 @@ picture {
   }
 }
 
-.link-animate {
+.section-link {
+  cursor: pointer;
   position: relative;
   transition: all 0.2s ease-in;
-  cursor: pointer;
+  font-size: clamp(14px, 2.5vw, 20px);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    font-weight: 900;
+    // color: $clr-gray;
+  }
 
   &::after {
     content: '';

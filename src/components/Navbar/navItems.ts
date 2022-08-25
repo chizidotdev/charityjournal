@@ -11,7 +11,8 @@ export const NAV_ITEMS: Array<NavItem> = [
     href: '/',
   },
   {
-    label: 'Trending',
+    label: 'News',
+    href: '/blog',
     children: [
       {
         label: 'Explore Design Work',
@@ -26,30 +27,16 @@ export const NAV_ITEMS: Array<NavItem> = [
     ],
   },
   {
-    label: 'Featured',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
-  },
-  {
     label: 'About',
-    href: '#',
+    href: '/about',
   },
   {
-    label: 'Gallery',
-    href: '#',
+    label: 'Charity 101',
+    href: '/introduction-to-charity',
   },
   {
     label: 'Careers',
+    href: '/careers',
     children: [
       {
         label: 'Job Board',

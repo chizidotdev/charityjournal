@@ -26,6 +26,7 @@ const DesktopNav = () => {
             <Link
               px={5}
               fontSize={'sm'}
+              width={'max-content'}
               color={linkColor}
               _hover={{
                 textDecoration: 'none',
