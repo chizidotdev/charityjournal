@@ -5,18 +5,17 @@ import React from 'react';
 
 interface TrendingProps {
   title: string;
+  nolink?: boolean;
 }
 
-const Trending: React.FC<TrendingProps> = ({ title }) => {
+const Trending: React.FC<TrendingProps> = ({ title, nolink }) => {
   return (
     <div className=''>
       <div>
         <Divider borderColor='#d5d5d5' />
         <div className='flex items-center justify-between py-5'>
           <h1 className='heading-2 uppercase'>{title}</h1>
-          <div className='link'>
-            <Link href='/'>View all</Link>
-          </div>
+          <div className='link'>{!nolink && <Link href='/blog'>View all</Link>}</div>
         </div>
         <Divider borderColor='#d5d5d5' />
       </div>
@@ -27,7 +26,7 @@ const Trending: React.FC<TrendingProps> = ({ title }) => {
   );
 };
 
-const Content = () => {
+export const Content = () => {
   return (
     <div className='flex flex-col md:flex-row justify-between gap-6 lg:gap-10 pt-10 lg:pt-10'>
       <div className='relative self-center w-full md:w-2/6 h-56 rounded-md overflow-hidden'>
@@ -36,16 +35,16 @@ const Content = () => {
 
       <div className='w-full md:w-3/5 md:h-56 flex flex-col gap-2 pb-5'>
         <div className='flex items-center justify-between gap-6'>
-          <div className='flex items-center gap-5'>
-            <Divider width={10} borderColor='#d5d5d5' />
-            <span className='uppercase opacity-50 text-xs'>by John Doe</span>
-          </div>
-
           <span className='md:hidden md:mt-4 text-xs opacity-50 flex items-center gap-2'>
             <span>Aug 15</span>
             <Divider width={3} borderColor='#373435' />
             <span>5 min read</span>
           </span>
+
+          <div className='flex items-center gap-5'>
+            <Divider width={10} borderColor='#d5d5d5' />
+            <span className='uppercase opacity-50 text-xs'>by John Doe</span>
+          </div>
         </div>
 
         <h1 className='heading-2-sm'>

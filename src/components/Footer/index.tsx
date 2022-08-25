@@ -6,7 +6,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className='bg-pri text-white'>
-      <div className='container pt-16 pb-20 flex flex-col md:flex-row gap-16 md:gap-10'>
+      <div className='container pt-16 pb-20 lg:pt-24 lg:pb-28 flex flex-col md:flex-row gap-16 md:gap-10'>
         <div className='max-w-[500px] md:w-1/3 flex flex-col gap-5'>
           <Link href='/'>
             <div className='w-36 h-10 relative'>
@@ -22,10 +22,10 @@ const Footer = () => {
           <p className='text-xs'>&copy; Charity Journal 2022. All rights reserved.</p>
         </div>
 
-        <div className='max-w-[500px] md:w-1/3 flex flex-col gap-5'>
+        <div className='max-w-[500px] md:w-1/3 flex flex-col gap-5 lg:gap-7'>
           <div className='uppercase heading-4'>Contact us</div>
 
-          <div className='caption-sm flex flex-col gap-1'>
+          <div className='caption-sm flex flex-col gap-1 lg:gap-3'>
             <p className='link-white w-max caption-sm'>info@charityjournal.com</p>
             <p>1437 Rollins Road, Wellfleet. Nebraska.</p>
             <p>308-963-5861</p>
