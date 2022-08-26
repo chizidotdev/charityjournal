@@ -12,18 +12,18 @@ const Banner: React.FC<TrendingProps> = ({ title }) => {
       <div>
         <Divider borderColor='#d5d5d5' />
         <div className='flex items-center justify-between py-5'>
-          <h1 className='heading-2 uppercase'>{title}</h1>
+          <h1 className='heading-2-sm uppercase'>{title}</h1>
           <div className='link'>{/* <Link href='/'>View all</Link> */}</div>
         </div>
         <Divider borderColor='#d5d5d5' />
       </div>
 
-      <div className='flex flex-col lg:flex-row gap-8 pt-10'>
+      <div className='flex flex-col lg:flex-row md:gap-8 pt-10'>
         <div className='lg:w-3/4'>
           <Content />
         </div>
 
-        <Center height='full'>
+        <Center height='full' display={{ base: 'none', lg: 'flex' }}>
           <Divider orientation='vertical' borderColor={'#000'} />
         </Center>
 
@@ -41,7 +41,7 @@ export default Banner;
 const Content = () => {
   return (
     <div className='flex flex-col justify-between gap-6'>
-      <div className='relative self-center w-full h-80 md:h-96 rounded-md overflow-hidden'>
+      <div className='relative self-center w-full h-60 md:h-96 rounded-md overflow-hidden'>
         <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
       </div>
 

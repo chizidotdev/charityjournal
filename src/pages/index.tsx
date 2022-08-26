@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import Footer from '../components/Footer';
 import SideBar from '../components/Sidebar';
-import Trending from '../components/Trending';
+import Trending from '../components/Blog';
 // import { trpc } from '../utils/trpc';
 import { signIn } from 'next-auth/react';
 

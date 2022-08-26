@@ -2,8 +2,8 @@ import { Divider } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import React from 'react';
 import Footer from '../../components/Footer';
-import { Content } from '../../components/Trending';
-import Banner from '../../components/Trending/Banner';
+import { Content } from '../../components/Blog';
+import Banner from '../../components/Blog/Banner';
 
 const Trending: NextPage = () => {
   return (
@@ -14,15 +14,17 @@ const Trending: NextPage = () => {
         <div className='mt-10'>
           <div className=''>
             <Divider borderColor='#d5d5d5' />
-            <div className='section-nav flex items-center justify-center gap-10 p-5 px-10'>
+
+            <h1 className='heading-2-sm uppercase py-5'>MOST RECENT</h1>
+            {/* <div className='section-nav flex items-center justify-center gap-10 p-5 px-10'>
               <span className='section-link active'>All</span>
               <span className='section-link'>Education</span>
               <span className='section-link'>Health</span>
               <span className='section-link'>Culture</span>
-              {/* <span className='section-link'>Education</span>
+              <span className='section-link'>Education</span>
               <span className='section-link'>Health</span>
-              <span className='section-link'>Culture</span> */}
-            </div>
+              <span className='section-link'>Culture</span>
+            </div> */}
             <Divider borderColor='#d5d5d5' />
           </div>
 

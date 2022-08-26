@@ -2,7 +2,7 @@ import { Box, Divider, HStack, Text, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Content } from '../../../components/Trending';
+import { Content } from '../../../components/Blog';
 import Footer from '../../../components/Footer';
 
 const Post = () => {
