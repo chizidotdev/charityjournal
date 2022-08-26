@@ -36,7 +36,7 @@ const Trending: NextPage = () => {
           <Content />
 
           <div className='py-20 flex flex-col items-center justify-center w-full'>
-            <button className='section-link mb-6'>Load More</button>
+            <button className='link mb-6'>Load More</button>
             <Divider borderColor='#d5d5d5' />
           </div>
         </div>

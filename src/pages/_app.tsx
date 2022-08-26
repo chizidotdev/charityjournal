@@ -19,7 +19,10 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
           <meta name='description' content='Charity Journal | Telling the story of good deeds' />
           <link rel='icon' href='/logob-sec.png' />
         </Head>
-        <Navbar />
+
+        <div className='sticky top-0 bg-white z-10'>
+          <Navbar />
+        </div>
 
         <Component {...pageProps} />
       </SessionProvider>

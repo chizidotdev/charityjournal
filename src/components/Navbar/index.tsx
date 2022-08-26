@@ -16,7 +16,7 @@ import { HamburgerIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import DesktopNav from './DesktopNav';
 import MobileNav from './MobileNav';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
@@ -27,6 +27,34 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
 
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const controlNavbar = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > lastScrollY) {
+        // if scroll down hide the navbar
+        setShow(false);
+      } else {
+        // if scroll up show the navbar
+        setShow(true);
+      }
+
+      // remember current page location to use in the next move
+      setLastScrollY(window.scrollY);
+    }
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [controlNavbar]);
   // console.log('session==========', session);
 
   return (
@@ -81,16 +109,21 @@ export default function Navbar() {
 
       <Divider borderColor='#d5d5d5' />
 
-      <div className='container hidden lg:flex items-center justify-between mt-5'>
-        <DesktopNav />
-        <div className='flex items-center'>
-          <div className={`${searchActive && 'active'} search-bar overflow-hidden`}>
-            <Input onBlur={() => setSearchActive(false)} />
+      <div className={show ? '' : 'absolute -top-full'}>
+        <div className='container hidden lg:flex items-center justify-between mt-5'>
+          <DesktopNav />
+          <div className='flex items-center'>
+            <div className={`${searchActive && 'active'} search-bar overflow-hidden`}>
+              <Input onBlur={() => setSearchActive(false)} />
+            </div>
+            <Center height='30px' mx={'10'}>
+              <Divider orientation='vertical' color={'#000'} />
+            </Center>
+            <SearchIcon
+              className='cursor-pointer'
+              onClick={() => setSearchActive((prev) => !prev)}
+            />
           </div>
-          <Center height='30px' mx={'10'}>
-            <Divider orientation='vertical' color={'#000'} />
-          </Center>
-          <SearchIcon className='cursor-pointer' onClick={() => setSearchActive((prev) => !prev)} />
         </div>
       </div>
     </>
