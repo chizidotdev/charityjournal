@@ -19,7 +19,7 @@ const DesktopNav = () => {
   // const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
   return (
-    <Stack direction={'row'} spacing={4} pb={6}>
+    <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Popover trigger={'hover'} placement={'bottom-start'} key={navItem.label}>
           <PopoverTrigger>

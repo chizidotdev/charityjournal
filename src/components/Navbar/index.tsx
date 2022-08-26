@@ -109,7 +109,7 @@ export default function Navbar() {
 
       <Divider borderColor='#d5d5d5' />
 
-      <div className={show ? '' : 'absolute -top-full'}>
+      <div className={`transition-all ${show ? 'pb-6' : 'absolute -top-full'}`}>
         <div className='container hidden lg:flex items-center justify-between mt-5'>
           <DesktopNav />
           <div className='flex items-center'>

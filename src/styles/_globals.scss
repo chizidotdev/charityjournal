@@ -201,7 +201,9 @@ picture {
 
 .active {
   // color: $clr-pri-b;
-  font-weight: 700;
+  // font-weight: 700;
+  border: none;
+  outline: none;
 
   &::after {
     content: '';
@@ -211,7 +213,7 @@ picture {
     border-radius: inherit;
     width: 100%;
     height: 1px;
-    background-color: rgba(0, 0, 0, 0.7);
+    // background-color: rgba(0, 0, 0, 0.7);
     transition: all 0.3s ease-in-out;
     z-index: 0;
   }
