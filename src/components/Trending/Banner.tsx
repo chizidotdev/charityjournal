@@ -72,7 +72,7 @@ const Content = () => {
   );
 };
 
-const SmallContent = () => {
+export const SmallContent = () => {
   return (
     <div className='flex flex-col justify-between gap-6 lg:gap-6 mb-4'>
       <div className='relative self-center w-full h-60 lg:h-36 rounded-md overflow-hidden'>

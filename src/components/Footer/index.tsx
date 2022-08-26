@@ -6,11 +6,11 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className='bg-pri text-white'>
-      <div className='container pt-16 pb-20 lg:pt-24 lg:pb-28 flex flex-col md:flex-row gap-16 md:gap-10'>
+      <div className='container pt-16 pb-20 lg:pt-20 lg:pb-24 flex flex-col md:flex-row gap-16 md:gap-10'>
         <div className='max-w-[500px] md:w-1/3 flex flex-col gap-5'>
           <Link href='/'>
             <div className='w-36 h-10 relative'>
-              <Image alt='' src='/charity.png' layout='fill' priority />
+              <Image alt='' src='/logob-white.png' layout='fill' priority />
             </div>
           </Link>
 
