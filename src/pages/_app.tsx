@@ -20,7 +20,7 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
           <link rel='icon' href='/logob-sec.png' />
         </Head>
 
-        <div className='sticky top-0 bg-white z-10'>
+        <div className='sticky top-0 z-10'>
           <Navbar />
         </div>
 

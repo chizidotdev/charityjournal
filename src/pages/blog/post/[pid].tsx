@@ -16,19 +16,19 @@ const Post = () => {
           </div>
 
           <div className='w-full flex items-center justify-between py-2'>
-            <div className='flex items-center gap-5'>
-              <Divider width={10} borderColor='#d5d5d5' />
-              <span className='uppercase opacity-50 text-xs'>by John Doe</span>
-            </div>
-
             <div className='text-xs opacity-50 flex items-center gap-2'>
               <span>Aug 15</span>
               <Divider width={3} borderColor='#373435' />
               <span>5 min read</span>
             </div>
+
+            <div className='flex items-center gap-5'>
+              <Divider width={10} borderColor='#d5d5d5' />
+              <span className='uppercase opacity-50 text-xs'>by John Doe</span>
+            </div>
           </div>
 
-          <h1 className='heading-2 text-center lg:px-10'>
+          <h1 className='heading-2 md:text-center lg:px-10'>
             Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod sit amet.
           </h1>
         </VStack>

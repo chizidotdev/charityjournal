@@ -8,17 +8,17 @@ interface TrendingProps {
 
 const Banner: React.FC<TrendingProps> = ({ title }) => {
   return (
-    <div>
+    <>
       <div>
-        <Divider borderColor='#d5d5d5' />
-        <div className='flex items-center justify-between py-5'>
-          <h1 className='heading-2-sm uppercase'>{title}</h1>
+        {/* <Divider borderColor='#d5d5d5' /> */}
+        <div className='flex items-center justify-between pb-3'>
+          <h1 className='heading-2 uppercase'>{title}</h1>
           <div className='link'>{/* <Link href='/'>View all</Link> */}</div>
         </div>
-        <Divider borderColor='#d5d5d5' />
+        {/* <Divider borderColor='#d5d5d5' /> */}
       </div>
 
-      <div className='flex flex-col lg:flex-row md:gap-8 pt-10'>
+      <div className='flex flex-col lg:flex-row md:gap-8 pt-5 md:pt-10'>
         <div className='lg:w-3/4'>
           <Content />
         </div>
@@ -32,7 +32,7 @@ const Banner: React.FC<TrendingProps> = ({ title }) => {
           <SmallContent />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

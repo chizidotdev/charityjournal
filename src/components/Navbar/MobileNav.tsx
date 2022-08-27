@@ -1,11 +1,11 @@
-import { ChevronDownIcon, SearchIcon } from '@chakra-ui/icons';
+import { SearchIcon } from '@chakra-ui/icons';
 import {
   Stack,
   useColorModeValue,
   useDisclosure,
   Flex,
-  Icon,
-  Collapse,
+  // Icon,
+  // Collapse,
   Link,
   Text,
   Divider,
@@ -36,7 +36,7 @@ const MobileNav = () => {
 };
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { onToggle } = useDisclosure();
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>

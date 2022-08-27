@@ -20,6 +20,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
+import { hideNav, showNav } from '../../utils/gsap';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -27,17 +28,19 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [show, setShow] = useState(true);
+  // const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const controlNavbar = useCallback(() => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
         // if scroll down hide the navbar
-        setShow(false);
+        // setShow(false);
+        hideNav();
       } else {
         // if scroll up show the navbar
-        setShow(true);
+        // setShow(true);
+        showNav();
       }
 
       // remember current page location to use in the next move
@@ -59,7 +62,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className='container '>
+      <header className='container z-10 relative bg-white'>
         <div className='flex items-center justify-between py-5'>
           <div className='block lg:hidden'>
             <IconButton
@@ -109,8 +112,9 @@ export default function Navbar() {
 
       <Divider borderColor='#d5d5d5' />
 
-      <div className={`transition-all ${show ? 'pb-6' : 'absolute -top-full'}`}>
-        <div className='container hidden lg:flex items-center justify-between mt-5'>
+      {/* <div className={`transition-all ${show ? 'pb-6' : 'absolute -top-full'}`}> */}
+      <div className='nav-menu-toggle hidden lg:block -z-10 pb-6 bg-white'>
+        <div className='container hidden lg:flex items-center justify-between pt-5 -mt-1'>
           <DesktopNav />
           <div className='flex items-center'>
             <div className={`${searchActive && 'active'} search-bar overflow-hidden`}>
@@ -126,6 +130,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      <Divider borderColor='#d5d5d5' className='hidden bottom-border' />
     </>
   );
 }
