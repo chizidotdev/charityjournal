@@ -8,14 +8,14 @@ import Banner from '../../components/Blog/Banner';
 const Trending: NextPage = () => {
   return (
     <>
-      <section className='container my-10'>
+      <section className='container my-5'>
         <Banner title='Trending' />
 
         <div className='mt-10'>
           <div className=''>
             <Divider borderColor='#d5d5d5' />
 
-            <h1 className='heading-2-sm uppercase py-5'>MOST RECENT</h1>
+            <h1 className='heading-2 uppercase py-5'>MOST RECENT</h1>
             {/* <div className='section-nav flex items-center justify-center gap-10 p-5 px-10'>
               <span className='section-link active'>All</span>
               <span className='section-link'>Education</span>
