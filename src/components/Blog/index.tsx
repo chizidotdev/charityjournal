@@ -8,6 +8,11 @@ interface TrendingProps {
   nolink?: boolean;
 }
 
+interface ContentProps {
+  image?: string;
+  nolink?: boolean;
+}
+
 const Trending: React.FC<TrendingProps> = ({ title, nolink }) => {
   return (
     <div className=''>
@@ -20,17 +25,22 @@ const Trending: React.FC<TrendingProps> = ({ title, nolink }) => {
         <Divider borderColor='#d5d5d5' />
       </div>
 
-      <Content />
-      <Content />
+      <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+      <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
     </div>
   );
 };
 
-export const Content = () => {
+export const Content: React.FC<ContentProps> = ({ image }) => {
   return (
     <div className='flex flex-col md:flex-row justify-between gap-6 lg:gap-10 pt-10 lg:pt-10'>
       <div className='relative self-center w-full md:w-2/6 h-56 rounded-md overflow-hidden'>
-        <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
+        <Image
+          src={image ? image : 'https://picsum.photos/300/200'}
+          alt=''
+          layout='fill'
+          objectFit='cover'
+        />
       </div>
 
       <div className='w-full md:w-3/5 md:h-56 flex flex-col gap-2 pb-5'>

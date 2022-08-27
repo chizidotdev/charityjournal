@@ -42,7 +42,12 @@ const Content = () => {
   return (
     <div className='flex flex-col justify-between gap-6'>
       <div className='relative self-center w-full h-60 md:h-96 rounded-md overflow-hidden'>
-        <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
+        <Image
+          src={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
+          alt=''
+          layout='fill'
+          objectFit='cover'
+        />
       </div>
 
       <div className='w-full flex flex-col gap-2 pb-5'>
@@ -76,7 +81,12 @@ export const SmallContent = () => {
   return (
     <div className='flex flex-col justify-between gap-6 lg:gap-6 mb-4'>
       <div className='relative self-center w-full h-60 lg:h-36 rounded-md overflow-hidden'>
-        <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
+        <Image
+          src={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
+          alt=''
+          layout='fill'
+          objectFit='cover'
+        />
       </div>
 
       <div className='w-full flex flex-col gap-2 pb-5'>

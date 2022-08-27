@@ -28,12 +28,12 @@ const Trending: NextPage = () => {
             <Divider borderColor='#d5d5d5' />
           </div>
 
-          <Content />
-          <Content />
-          <Content />
-          <Content />
-          <Content />
-          <Content />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
+          <Content image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`} />
 
           <div className='py-20 flex flex-col items-center justify-center w-full'>
             <button className='link mb-6'>Load More</button>

@@ -28,7 +28,12 @@ const Home: NextPage = () => {
           <div className='flex gap-5'>
             <div className='feature_card hidden xl:flex flex-col w-64 min-w-[256px]'>
               <div className='h-2/5'>
-                <Image src='https://picsum.photos/300/200' width={500} height={300} alt='' />
+                <Image
+                  src={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
+                  width={500}
+                  height={300}
+                  alt=''
+                />
               </div>
               <div className='feature_card-content p-5 text-white'>
                 <h1 className='heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
