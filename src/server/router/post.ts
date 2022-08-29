@@ -19,11 +19,27 @@ export const postRouter = createRouter()
       return await ctx.prisma.post.findMany();
     },
   })
+  .query('findPost', {
+    input: z.object({
+      query: z.string(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.post.findMany({
+        where: {
+          title: {
+            search: input.query,
+          },
+        },
+      });
+    },
+  })
   .mutation('createPost', {
     input: z.object({
       title: z.string(),
+      excerpt: z.string(),
       content: z.string(),
       authorId: z.string(),
+      published: z.boolean(),
     }),
     async resolve({ input, ctx }) {
       const post = await ctx.prisma.post.create({
