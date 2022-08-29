@@ -95,7 +95,7 @@ img {
   transition: text-decoration-color 0.2s ease-in-out;
 
   &:hover {
-    text-decoration-color: black;
+    text-decoration-color: inherit;
   }
 }
 
