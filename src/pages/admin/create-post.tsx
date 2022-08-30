@@ -2,8 +2,8 @@ import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Editor from '../components/Draft';
-import { trpc } from '../utils/trpc';
+import Editor from '../../components/Draft';
+import { trpc } from '../../utils/trpc';
 
 interface FormValues {
   title: string;
