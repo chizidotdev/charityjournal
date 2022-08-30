@@ -1,0 +1,15 @@
+.editor {
+  * {
+    all: revert;
+  }
+
+  min-height: 20rem;
+  background-color: rgba(0, 0, 0, 0.015);
+
+  &__wrapper {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    // border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}

@@ -1,10 +1,11 @@
 // src/pages/_app.tsx
+import '../styles/main.scss';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { withTRPC } from '@trpc/next';
 import type { AppRouter } from '../server/router';
 import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
-import '../styles/main.scss';
 import { ChakraProvider } from '@chakra-ui/react';
 import Navbar from '../components/Navbar';
 import Head from 'next/head';
