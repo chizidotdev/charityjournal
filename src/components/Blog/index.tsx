@@ -51,12 +51,12 @@ export const Content: React.FC<ContentProps> = ({ image, layout }) => {
             alt=''
             layout='fill'
             objectFit='cover'
-            className='blog-img'
+            className='image-animate'
           />
         </div>
 
         <div className='w-3/4 md:w-3/5 md:h-56 flex flex-col gap-2 md:pb-5'>
-          <h1 className='heading-2-sm'>
+          <h1 className='heading-2-sm heading-animate'>
             Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
           </h1>
 
@@ -83,7 +83,7 @@ export const Content: React.FC<ContentProps> = ({ image, layout }) => {
             alt=''
             layout='fill'
             objectFit='cover'
-            className='blog-img'
+            className='image-animate'
           />
         </div>
 
@@ -101,7 +101,7 @@ export const Content: React.FC<ContentProps> = ({ image, layout }) => {
             </div> */}
           </div>
 
-          <h1 className='heading-2-sm'>
+          <h1 className='heading-2-sm heading-animate'>
             Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
           </h1>
 

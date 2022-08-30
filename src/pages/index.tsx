@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       <div className='container my-7 md:my-10'>
         <section className='flex lg:gap-5'>
           <div className='flex charity-month'>
-            <div className='sm:w-3/4 min-w-[280px] sm:mr-[20%]'>
+            <div className='sm:w-3/4 min-w-[250px] sm:mr-[20%]'>
               <h1 className='heading-1 mb-3 md:mb-5'>
                 Charity Of <br /> The Month
               </h1>
@@ -34,10 +34,11 @@ const Home: NextPage = () => {
                   width={500}
                   height={300}
                   alt=''
+                  className='image-animate'
                 />
               </div>
               <div className='feature_card-content p-5 text-white'>
-                <h1 className='heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
+                <h1 className='heading-animate heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
                 <p className='caption-sm'>
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
                 </p>
@@ -45,10 +46,16 @@ const Home: NextPage = () => {
             </div>
             <div className='feature_card hidden lg:flex flex-col w-64 min-w-[256px]'>
               <div className='h-2/5'>
-                <Image src='https://picsum.photos/300/200' width={500} height={300} alt='' />
+                <Image
+                  src='https://picsum.photos/300/200'
+                  width={500}
+                  height={300}
+                  alt=''
+                  className='image-animate'
+                />
               </div>
               <div className='feature_card-content p-5 text-white'>
-                <h1 className='heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
+                <h1 className='heading-animate heading-2-sm mb-1'>Lorem Ipsum Dolor</h1>
                 <p className='caption-sm'>
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
                 </p>

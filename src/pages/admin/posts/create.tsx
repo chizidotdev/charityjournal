@@ -65,7 +65,7 @@ const CreatePost = () => {
                 <Editor setContent={setContent} />
               </label>
 
-              <div className='flex justify-between'>
+              <div className='flex flex-col-reverse gap-5 md:flex-row justify-between'>
                 <label className='flex items-center gap-5'>
                   Publish:
                   <Checkbox {...register('published')} size={'lg'} borderColor={'#5f5e5e'} />

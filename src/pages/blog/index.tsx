@@ -17,15 +17,6 @@ const Trending: NextPage = () => {
             <Divider borderColor='#d5d5d5' />
 
             <h1 className='heading-2 uppercase py-5'>MOST RECENT</h1>
-            {/* <div className='section-nav flex items-center justify-center gap-10 p-5 px-10'>
-              <span className='section-link active'>All</span>
-              <span className='section-link'>Education</span>
-              <span className='section-link'>Health</span>
-              <span className='section-link'>Culture</span>
-              <span className='section-link'>Education</span>
-              <span className='section-link'>Health</span>
-              <span className='section-link'>Culture</span>
-            </div> */}
             <Divider borderColor='#d5d5d5' />
           </div>
 

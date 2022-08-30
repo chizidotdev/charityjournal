@@ -27,7 +27,14 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 0;
+    transition: all 0.3s ease-in-out;
   }
+
+  // &:hover {
+  //   &::after {
+  //     background-color: rgba(0, 0, 0, 0.5);
+  //   }
+  // }
 }
 
 .feature_card {

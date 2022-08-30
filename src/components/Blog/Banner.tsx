@@ -12,7 +12,7 @@ const Banner: React.FC<TrendingProps> = ({ title }) => {
       <div>
         {/* <Divider borderColor='#d5d5d5' /> */}
         <div className='flex items-center justify-between pb-3'>
-          <h1 className='heading-2 uppercase'>{title}</h1>
+          <h1 className='heading-2 heading-animate uppercase'>{title}</h1>
           <div className='link'>{/* <Link href='/'>View all</Link> */}</div>
         </div>
         {/* <Divider borderColor='#d5d5d5' /> */}
@@ -47,6 +47,7 @@ const Content = () => {
           alt=''
           layout='fill'
           objectFit='cover'
+          className='image-animate'
         />
       </div>
 
@@ -63,7 +64,7 @@ const Content = () => {
           </div>
         </div>
 
-        <h1 className='heading-2'>
+        <h1 className='heading-2 heading-animate'>
           Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
         </h1>
 
@@ -86,6 +87,7 @@ export const SmallContent = () => {
           alt=''
           layout='fill'
           objectFit='cover'
+          className='image-animate'
         />
       </div>
 
@@ -103,7 +105,7 @@ export const SmallContent = () => {
           </div>
         </div>
 
-        <h1 className='heading-2-sm'>
+        <h1 className='heading-2-sm heading-animate'>
           Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
         </h1>
 
