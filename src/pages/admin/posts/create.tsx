@@ -2,9 +2,9 @@ import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Editor from '../../components/Draft';
-import AdminLayout from '../../components/UI/AdminLayout';
-import { trpc } from '../../utils/trpc';
+import Editor from '../../../components/Draft';
+import AdminLayout from '../../../components/UI/AdminLayout';
+import { trpc } from '../../../utils/trpc';
 
 interface FormValues {
   title: string;
@@ -44,9 +44,7 @@ const CreatePost = () => {
   return (
     <AdminLayout pageTitle='Write New Post'>
       <div className='container py-5'>
-        <section className='max-w-3xl mx-auto'>
-          <h1 className='heading-1 no-underline'>Write New Post</h1>
-
+        <section className='max-w-3xl'>
           <div className='py-5 flex flex-col gap-10'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
               {/* register your input into the hook by invoking the "register" function */}
@@ -67,10 +65,17 @@ const CreatePost = () => {
                 <Editor setContent={setContent} />
               </label>
 
-              <label>
-                Publish:
-                <Checkbox {...register('published')} />
-              </label>
+              <div className='flex justify-between'>
+                <label className='flex items-center gap-5'>
+                  Publish:
+                  <Checkbox {...register('published')} size={'lg'} borderColor={'#5f5e5e'} />
+                </label>
+
+                <label>
+                  Cover Photo:
+                  <Input type='file' placeholder='Select Image' border={'none'} padding={'none'} />
+                </label>
+              </div>
 
               <Button type='submit' my={5} className='w-32'>
                 Submit

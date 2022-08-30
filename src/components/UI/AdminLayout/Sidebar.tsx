@@ -12,7 +12,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     <Box
       flexDirection={'column'}
       transition={{ base: '2s ease-in-out', md: 'none' }}
-      bg={'#4b4a4a'}
+      bg={'#373435'}
       borderRight='1px'
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}

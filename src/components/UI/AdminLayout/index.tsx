@@ -30,7 +30,7 @@ export default function AdminLayout({ children, pageTitle }: LayoutProps) {
 
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} pageTitle={pageTitle} />
-      <Box ml={{ base: 0, md: 60 }} p='4'>
+      <Box ml={{ base: 0, md: 60 }} p='4' px={{ lg: 10 }}>
         {children}
       </Box>
     </Box>

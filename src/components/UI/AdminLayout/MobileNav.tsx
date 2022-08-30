@@ -40,12 +40,7 @@ const MobileNav = ({ pageTitle, onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        // display={{ base: 'flex', md: 'none' }}
-        fontSize='2xl'
-        fontWeight='bold'
-        // ml={5}
-      >
+      <Text px={{ base: '', lg: '7' }} fontSize='2xl' fontWeight='bold'>
         {pageTitle}
       </Text>
 
