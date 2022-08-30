@@ -114,8 +114,8 @@ img {
 .heading-2-sm {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 1.875rem;
+  font-size: clamp(1.2rem, 4vw, 1.4rem);
+  line-height: clamp(1.6rem, 4vw, 1.9rem);
 }
 
 .heading-4 {
@@ -134,7 +134,7 @@ img {
 .caption-sm {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
-  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 .link {

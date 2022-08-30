@@ -59,9 +59,9 @@ const Home: NextPage = () => {
 
         <section className=' flex my-10 md:my-16 gap-10'>
           <div>
-            <Trending title='Featured' nolink />
+            <Trending layout='normal' title='Featured' nolink />
             <div className='py-10' />
-            <Trending title='Most Recent' />
+            <Trending layout='horizontal' title='Most Recent' />
           </div>
 
           <div className='hidden lg:block w-2/5'>
