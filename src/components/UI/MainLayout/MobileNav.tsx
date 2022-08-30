@@ -4,17 +4,20 @@ import {
   useColorModeValue,
   useDisclosure,
   Flex,
-  // Icon,
-  // Collapse,
   Link,
   Text,
   Divider,
   Center,
   Input,
 } from '@chakra-ui/react';
+import { Session } from 'next-auth';
 import { NAV_ITEMS, NavItem } from './navItems';
 
-const MobileNav = () => {
+interface MobileNavProps {
+  session: Session | null;
+}
+
+const MobileNav = ({ session }: MobileNavProps) => {
   return (
     <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ lg: 'none' }}>
       {NAV_ITEMS.map((navItem) => (
@@ -30,7 +33,14 @@ const MobileNav = () => {
         <SearchIcon className='cursor-pointer' />
       </div>
       <Divider />
-      <MobileNavItem label='Login' href='/api/auth/signin' />
+      {session ? (
+        <>
+          <MobileNavItem label='Dashboard' href='/admin' />
+          <MobileNavItem label='Logout' href='/api/auth/signout' />
+        </>
+      ) : (
+        <MobileNavItem label='Login' href='/api/auth/signin' />
+      )}
     </Stack>
   );
 };
@@ -53,34 +63,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         <Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
           {label}
         </Text>
-        {/* {children && (
-          <Icon
-            as={ChevronDownIcon}
-            transition={'all .25s ease-in-out'}
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )} */}
       </Flex>
-
-      {/* <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align={'start'}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse> */}
     </Stack>
   );
 };

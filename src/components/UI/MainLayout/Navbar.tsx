@@ -28,18 +28,15 @@ export default function Navbar() {
   const router = useRouter();
   const { data: session } = useSession();
 
-  // const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const controlNavbar = useCallback(() => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
         // if scroll down hide the navbar
-        // setShow(false);
         hideNav();
       } else {
         // if scroll up show the navbar
-        // setShow(true);
         showNav();
       }
 
@@ -52,13 +49,11 @@ export default function Navbar() {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', controlNavbar);
 
-      // cleanup function
       return () => {
         window.removeEventListener('scroll', controlNavbar);
       };
     }
   }, [controlNavbar]);
-  // console.log('session==========', session);
 
   return (
     <>
@@ -95,7 +90,10 @@ export default function Navbar() {
                 </MenuButton>
                 <MenuList>
                   {session ? (
-                    <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                    <>
+                      <MenuItem onClick={() => router.push('/admin')}>Dashboard</MenuItem>
+                      <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+                    </>
                   ) : (
                     <MenuItem onClick={() => router.push('/api/auth/signin')}>Login</MenuItem>
                   )}
@@ -106,7 +104,7 @@ export default function Navbar() {
         </div>
 
         <Collapse in={isOpen} animateOpacity>
-          <MobileNav />
+          <MobileNav session={session} />
         </Collapse>
       </header>
 
