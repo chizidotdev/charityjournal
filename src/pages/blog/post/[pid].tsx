@@ -109,8 +109,8 @@ const Post = () => {
             </div>
           </div>
 
-          <Content />
-          <Content />
+          <Content layout='horizontal' />
+          <Content layout='horizontal' />
         </Box>
       </section>
 
