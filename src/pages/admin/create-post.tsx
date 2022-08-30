@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Editor from '../../components/Draft';
+import AdminLayout from '../../components/UI/AdminLayout';
 import { trpc } from '../../utils/trpc';
 
 interface FormValues {
@@ -41,42 +42,44 @@ const CreatePost = () => {
   };
 
   return (
-    <div className='container py-5'>
-      <section className='max-w-3xl mx-auto'>
-        <h1 className='heading-1 no-underline'>Write New Post</h1>
+    <AdminLayout pageTitle='Write New Post'>
+      <div className='container py-5'>
+        <section className='max-w-3xl mx-auto'>
+          <h1 className='heading-1 no-underline'>Write New Post</h1>
 
-        <div className='py-5 flex flex-col gap-10'>
-          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
-            {/* register your input into the hook by invoking the "register" function */}
-            <label>
-              Title:
-              <Input {...register('title', { required: true })} />
-            </label>
+          <div className='py-5 flex flex-col gap-10'>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
+              {/* register your input into the hook by invoking the "register" function */}
+              <label>
+                Title:
+                <Input {...register('title', { required: true })} />
+              </label>
 
-            <label>
-              Excerpt:
-              <Textarea {...register('excerpt', { required: true })} />
-            </label>
+              <label>
+                Excerpt:
+                <Textarea {...register('excerpt', { required: true })} />
+              </label>
 
-            {/* include validation with required or other standard HTML validation rules */}
-            <label>
-              Content:
-              {/* <Input {...register('content', { required: true })} /> */}
-              <Editor setContent={setContent} />
-            </label>
+              {/* include validation with required or other standard HTML validation rules */}
+              <label>
+                Content:
+                {/* <Input {...register('content', { required: true })} /> */}
+                <Editor setContent={setContent} />
+              </label>
 
-            <label>
-              Publish:
-              <Checkbox {...register('published')} />
-            </label>
+              <label>
+                Publish:
+                <Checkbox {...register('published')} />
+              </label>
 
-            <Button type='submit' my={5} className='w-32'>
-              Submit
-            </Button>
-          </form>
-        </div>
-      </section>
-    </div>
+              <Button type='submit' my={5} className='w-32'>
+                Submit
+              </Button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </AdminLayout>
   );
 };
 

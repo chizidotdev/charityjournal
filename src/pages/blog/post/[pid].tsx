@@ -4,10 +4,11 @@ import Link from 'next/link';
 import React from 'react';
 import { Content } from '../../../components/Blog';
 import Footer from '../../../components/Footer';
+import Layout from '../../../components/UI/MainLayout';
 
 const Post = () => {
   return (
-    <>
+    <Layout>
       <section className='container my-10'>
         {/* Heading */}
         <VStack align='center' px={{ base: 2, md: 12, lg: '14%' }}>
@@ -116,7 +117,7 @@ const Post = () => {
       <section>
         <Footer />
       </section>
-    </>
+    </Layout>
   );
 };
 

@@ -4,10 +4,11 @@ import React from 'react';
 import Footer from '../../components/Footer';
 import { Content } from '../../components/Blog';
 import Banner from '../../components/Blog/Banner';
+import Layout from '../../components/UI/MainLayout';
 
 const Trending: NextPage = () => {
   return (
-    <>
+    <Layout>
       <section className='container my-5'>
         <Banner title='Trending' />
 
@@ -44,7 +45,7 @@ const Trending: NextPage = () => {
       <section>
         <Footer />
       </section>
-    </>
+    </Layout>
   );
 };
 
