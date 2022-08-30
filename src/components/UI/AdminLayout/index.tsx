@@ -8,7 +8,7 @@ interface LayoutProps {
   pageTitle: string;
 }
 
-export default function Layout({ children, pageTitle }: LayoutProps) {
+export default function AdminLayout({ children, pageTitle }: LayoutProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH='100vh' bg={'#fff'}>

@@ -12,7 +12,6 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  VStack,
   Input,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';

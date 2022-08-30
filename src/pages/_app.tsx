@@ -7,7 +7,6 @@ import type { AppType } from 'next/dist/shared/lib/utils';
 import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import Navbar from '../components/Navbar';
 import Head from 'next/head';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
@@ -20,10 +19,6 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
           <meta name='description' content='Charity Journal | Telling the story of good deeds' />
           <link rel='icon' href='/logob-sec.png' />
         </Head>
-
-        <div className='sticky top-0 z-10'>
-          <Navbar />
-        </div>
 
         <Component {...pageProps} />
       </SessionProvider>

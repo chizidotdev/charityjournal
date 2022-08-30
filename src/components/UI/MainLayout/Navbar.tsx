@@ -20,7 +20,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
-import { hideNav, showNav } from '../../utils/gsap';
+import { hideNav, showNav } from '../../../utils/gsap';
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();

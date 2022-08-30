@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Footer from '../components/Footer';
 import SideBar from '../components/Sidebar';
 import Trending from '../components/Blog';
+import Layout from '../components/UI/MainLayout';
 // import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
@@ -10,7 +11,7 @@ const Home: NextPage = () => {
   // const deletePost = trpc.useMutation(['post.deletePost']);
 
   return (
-    <>
+    <Layout>
       <div className='container my-7 md:my-10'>
         <section className='flex lg:gap-5'>
           <div className='flex charity-month'>
@@ -71,7 +72,7 @@ const Home: NextPage = () => {
       <section>
         <Footer />
       </section>
-    </>
+    </Layout>
   );
 };
 

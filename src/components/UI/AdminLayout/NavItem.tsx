@@ -1,4 +1,4 @@
-import { FlexProps, Flex, Icon, Link, Text, Box } from '@chakra-ui/react';
+import { FlexProps, Flex, Icon, Link } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 import { IoIosListBox, IoIosTrophy, IoMdHelpCircle } from 'react-icons/io';
