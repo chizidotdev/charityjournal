@@ -1,20 +1,20 @@
 import { FlexProps, Flex, Icon, Link } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
-import { IoIosListBox, IoIosTrophy, IoMdHelpCircle } from 'react-icons/io';
-import { FaGraduationCap } from 'react-icons/fa';
-import { HiChatAlt2 } from 'react-icons/hi';
-import { MdOutlineMenuBook, MdLibraryBooks } from 'react-icons/md';
-import { RiHome5Fill, RiOpenSourceFill, RiStackFill, RiTeamFill } from 'react-icons/ri';
+import { FiEdit } from 'react-icons/fi';
+import { IoIosExit } from 'react-icons/io';
+import { MdLibraryBooks, MdAddToPhotos } from 'react-icons/md';
+import { RiHome5Fill, RiBuildingLine } from 'react-icons/ri';
 
 interface NavItemProps extends FlexProps {
   icon?: IconType;
-  children: string | React.ReactNode;
+  href: string;
+  children: string;
 }
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
   return (
-    <Link href='#' style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link href={href || '/'} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         fontSize={14}
         align='center'
@@ -24,9 +24,9 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         borderRadius='0 0 0.3rem 0.3rem'
         role='group'
         cursor='pointer'
+        color='white'
         _hover={{
-          bg: '#333333',
-          color: 'white',
+          fontWeight: 'bold',
         }}
         {...rest}
       >
@@ -35,6 +35,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
             mr='4'
             fontSize='20'
             _groupHover={{
+              fontSize: '21',
               color: 'white',
             }}
             as={icon}
@@ -51,32 +52,35 @@ export default NavItem;
 export interface LinkItemProps {
   name: string;
   icon: IconType;
-  children?: LinkItemProps[];
+  link: string;
 }
 export const LinkItems: Array<LinkItemProps> = [
-  { name: 'Dashboard', icon: RiHome5Fill },
+  { name: 'Dashboard', icon: RiHome5Fill, link: '/admin' },
+  // {
+  //   name: 'Posts',
+  //   icon: MdOutlineMenuBook,
+  //   children: [
+  //     {
+  //       name: 'All Posts',
+  //       icon: IoIosExit,
+  //     },
+  //     {
+  //       name: 'Create Post',
+  //       icon: FiEdit,
+  //     },
+  //     // {
+  //     //   name: '',
+  //     //   icon: IoIosListBox,
+  //     // },
+  //   ],
+  // },
+  { name: 'Posts', icon: MdLibraryBooks, link: '/admin/posts' },
+  { name: 'Create Post', icon: FiEdit, link: '/admin/posts/create' },
+  { name: 'Charity', icon: RiBuildingLine, link: '/admin/charity' },
+  { name: 'Add Charity', icon: MdAddToPhotos, link: '/admin/charity/create' },
   {
-    name: 'Course Overview',
-    icon: MdOutlineMenuBook,
-    children: [
-      {
-        name: 'My Class',
-        icon: MdLibraryBooks,
-      },
-      {
-        name: 'Quiz',
-        icon: IoIosTrophy,
-      },
-      {
-        name: 'Task',
-        icon: IoIosListBox,
-      },
-    ],
+    name: 'Logout',
+    icon: IoIosExit,
+    link: '/api/auth/signout',
   },
-  { name: 'My Team', icon: RiTeamFill },
-  { name: 'Resources', icon: RiStackFill },
-  { name: 'Open Source', icon: RiOpenSourceFill },
-  { name: 'Certificate', icon: FaGraduationCap },
-  { name: 'Help', icon: IoMdHelpCircle },
-  { name: 'Feedback & Suggestions', icon: HiChatAlt2 },
 ];
