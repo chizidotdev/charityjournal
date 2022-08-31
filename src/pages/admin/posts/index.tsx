@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import AdminLayout from '../../../components/UI/AdminLayout';
 
@@ -49,12 +50,14 @@ const PostType = ({ name }: PostTypeProps) => {
 const PostItem = () => {
   return (
     <div className='flex gap-5 w-full'>
-      <span>01.</span>
+      <span>#01</span>
 
       <div className='w-4/5 lg:w-3/4'>
-        <h1 className='heading-4'>
-          Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
-        </h1>
+        <Link href='/admin/posts/edit/[id]' as={`/admin/posts/edit/${3}`}>
+          <h1 className='heading-4 cursor-pointer'>
+            Lorem ipsum dolor sit amet, con adipiscing elit, sed do eiusmod
+          </h1>
+        </Link>
 
         <p className='truncate'>
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

@@ -19,6 +19,16 @@ export const postRouter = createRouter()
       return await ctx.prisma.post.findMany();
     },
   })
+  .query('getPost', {
+    input: z.object({
+      id: z.number(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.post.findUnique({
+        where: { id: input.id },
+      });
+    },
+  })
   .query('findPost', {
     input: z.object({
       query: z.string(),
@@ -47,6 +57,25 @@ export const postRouter = createRouter()
         select: defaultPostSelect,
       });
       return post;
+    },
+  })
+  .mutation('updatePost', {
+    input: z.object({
+      id: z.number(),
+      title: z.string(),
+      excerpt: z.string(),
+      content: z.string(),
+      authorId: z.string(),
+      published: z.boolean(),
+    }),
+    async resolve({ input, ctx }) {
+      return await ctx.prisma.post.update({
+        where: {
+          id: input.id,
+        },
+        data: input,
+        select: defaultPostSelect,
+      });
     },
   })
   .mutation('deletePost', {
