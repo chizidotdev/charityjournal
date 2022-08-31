@@ -20,8 +20,6 @@ const EditPost = () => {
   const [content, setContent] = useState('');
   const router = useRouter();
 
-  console.log('router====', router.query);
-
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<FormValues>();
 
@@ -44,7 +42,7 @@ const EditPost = () => {
 
     console.log('input====', input);
 
-    // editPost.mutate(input);
+    editPost.mutate(input);
   };
 
   return (
