@@ -5,8 +5,11 @@ import Footer from '../../components/Footer';
 import { Content } from '../../components/Blog';
 import Banner from '../../components/Blog/Banner';
 import Layout from '../../components/UI/MainLayout';
+import { trpc } from '../../utils/trpc';
 
 const Trending: NextPage = () => {
+  const { data } = trpc.useQuery(['post.getPublishedPosts'], { refetchOnWindowFocus: false });
+
   return (
     <Layout>
       <section className='container my-5'>
@@ -16,37 +19,21 @@ const Trending: NextPage = () => {
           <div className=''>
             <Divider borderColor='#d5d5d5' />
 
-            <h1 className='heading-2 uppercase py-5'>MOST RECENT</h1>
+            <h1 className='heading-2 uppercase py-5'>Charity News</h1>
             <Divider borderColor='#d5d5d5' />
           </div>
 
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
-          <Content
-            layout='horizontal'
-            image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
-          />
+          {data?.map((post) => (
+            <Content
+              key={post.id}
+              image={`https://picsum.photos/id/${Math.round(Math.random() * 900)}/300/200/`}
+              layout='horizontal'
+              post={post}
+            />
+          ))}
 
           <div className='py-20 flex flex-col items-center justify-center w-full'>
-            <button className='link mb-6'>Load More</button>
+            {/* {<button className='link mb-6'>Load More</button>} */}
             <Divider borderColor='#d5d5d5' />
           </div>
         </div>

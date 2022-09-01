@@ -21,7 +21,9 @@ interface PostTypeProps {
 }
 
 const Posts = () => {
-  const { data, isLoading, isError } = trpc.useQuery(['post.getAllPosts']);
+  const { data, isLoading, isError } = trpc.useQuery(['post.getAllPosts'], {
+    refetchOnWindowFocus: false,
+  });
 
   let posts: JSX.Element = <div></div>;
 

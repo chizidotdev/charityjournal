@@ -1,8 +1,11 @@
-import { Divider, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Divider, Flex, HStack, VStack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import AdminLayout from '../../../components/UI/AdminLayout';
+import React, { useEffect } from 'react';
+import { Content } from '../../../components/Blog';
+import Footer from '../../../components/Footer';
+import Layout from '../../../components/UI/MainLayout';
 import { trpc } from '../../../utils/trpc';
 
 const Post = () => {
@@ -13,10 +16,12 @@ const Post = () => {
   );
 
   useEffect(() => {
-    const body = document.getElementById('body-admin');
+    const body = document.getElementById('body-user');
     if (body) {
       body.innerHTML = data?.content || '';
     }
+
+    console.log('data====', data?.content);
   }, [data]);
 
   let post: JSX.Element = <div></div>;
@@ -38,17 +43,14 @@ const Post = () => {
   }
 
   if (data) {
-    // console.log('data====', data.content);
-
     post = (
-      <section className='container my-10'>
-        {/* Heading */}
+      <>
         <VStack align='center' px={{ base: 2, md: 12, lg: '14%' }}>
           <div className='relative self-center w-full h-52 md:h-60 lg:h-72 rounded-md overflow-hidden'>
             <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
           </div>
 
-          <div className='w-full flex items-center justify-between py-2'>
+          {/* <div className='w-full flex items-center justify-between py-2'>
             <div className='text-xs opacity-50 flex items-center gap-2'>
               <span>Aug 15</span>
               <Divider width={3} borderColor='#373435' />
@@ -59,10 +61,9 @@ const Post = () => {
               <Divider width={10} borderColor='#d5d5d5' />
               <span className='uppercase opacity-50 text-xs'>by John Doe</span>
             </div>
-          </div>
+          </div> */}
 
-          <h1 className='heading-2 md:text-center lg:px-10'>{data?.title}</h1>
-          <p className='caption-sm text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
+          <h1 className='heading-2 md:text-center lg:px-10 md:py-5'>{data.title}</h1>
         </VStack>
 
         {/* Content */}
@@ -75,14 +76,46 @@ const Post = () => {
               height={40}
               borderColor='#373435'
             />
-            <div id='body-admin' className='w-full'></div>
+            <div id='body-user' className='w-full'></div>
           </HStack>
         </VStack>
-      </section>
+      </>
     );
   }
 
-  return <AdminLayout pageTitle='Posts'>{post}</AdminLayout>;
+  return (
+    <Layout>
+      <div className='container my-10'>
+        {/* Heading */}
+        <section>{post}</section>
+
+        {/* Tags */}
+
+        {/* Read More */}
+        <Box py={10}>
+          <div className=''>
+            <div>
+              <Divider borderColor='#d5d5d5' />
+              <div className='flex items-center justify-between py-5'>
+                <h1 className='heading-2-sm uppercase'>Read More</h1>
+                <div className='link'>
+                  <Link href='/blog'>View all</Link>
+                </div>
+              </div>
+              <Divider borderColor='#d5d5d5' />
+            </div>
+          </div>
+
+          <Content layout='horizontal' />
+          <Content layout='horizontal' />
+        </Box>
+      </div>
+
+      <section>
+        <Footer />
+      </section>
+    </Layout>
+  );
 };
 
 export default Post;

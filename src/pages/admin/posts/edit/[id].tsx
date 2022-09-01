@@ -20,7 +20,9 @@ const EditPost = () => {
   const [content, setContent] = useState('');
   const router = useRouter();
   const editPost = trpc.useMutation(['post.updatePost']);
-  const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }]);
+  const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }], {
+    refetchOnWindowFocus: false,
+  });
 
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<FormValues>({
