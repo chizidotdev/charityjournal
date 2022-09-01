@@ -33,12 +33,15 @@ const getBaseUrl = () => {
 };
 
 export default withTRPC<AppRouter>({
-  config() {
+  config({ ctx }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
      */
     const url = `${getBaseUrl()}/api/trpc`;
+
+    const ONE_DAY_SECONDS = 60 * 60 * 24;
+    ctx?.res?.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate=${ONE_DAY_SECONDS}`);
 
     return {
       url,
@@ -52,5 +55,5 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: false,
+  ssr: true,
 })(MyApp);
