@@ -19,12 +19,20 @@ interface FormValues {
 const EditPost = () => {
   const [content, setContent] = useState('');
   const router = useRouter();
+  const editPost = trpc.useMutation(['post.updatePost']);
+  const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }]);
 
   const { data: session } = useSession();
-  const { register, handleSubmit } = useForm<FormValues>();
-
-  const editPost = trpc.useMutation(['post.updatePost']);
-  const getPost = trpc.useQuery(['post.getPost', { id: router.query.id as unknown as number }]);
+  const { register, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      id: Number(router.query.id),
+      title: getPost.data?.title,
+      excerpt: getPost.data?.excerpt,
+      content: getPost.data?.content,
+      published: getPost.data?.published,
+      authorId: '',
+    },
+  });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (!session) {
@@ -32,7 +40,7 @@ const EditPost = () => {
     }
 
     const input: FormValues = {
-      id: router.query.id as unknown as number,
+      id: Number(router.query.id),
       title: data.title,
       published: data.published,
       excerpt: data.excerpt,
@@ -53,18 +61,12 @@ const EditPost = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
               <label>
                 Title:
-                <Input
-                  defaultValue={getPost.data?.title || ''}
-                  {...register('title', { required: true })}
-                />
+                <Input defaultValue={getPost.data?.title || ''} {...register('title')} />
               </label>
 
               <label>
                 Excerpt:
-                <Textarea
-                  defaultValue={getPost.data?.excerpt || ''}
-                  {...register('excerpt', { required: true })}
-                />
+                <Textarea defaultValue={getPost.data?.excerpt || ''} {...register('excerpt')} />
               </label>
 
               <label>
@@ -75,7 +77,12 @@ const EditPost = () => {
               <div className='flex flex-col-reverse gap-5 md:flex-row justify-between'>
                 <label className='flex items-center gap-5'>
                   Publish:
-                  <Checkbox {...register('published')} size={'lg'} borderColor={'#5f5e5e'} />
+                  <Checkbox
+                    defaultChecked={getPost.data?.published}
+                    {...register('published')}
+                    size={'lg'}
+                    borderColor={'#5f5e5e'}
+                  />
                 </label>
 
                 <label>

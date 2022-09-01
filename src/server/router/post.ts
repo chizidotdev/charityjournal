@@ -16,7 +16,11 @@ export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
 export const postRouter = createRouter()
   .query('getAllPosts', {
     async resolve({ ctx }) {
-      return await ctx.prisma.post.findMany();
+      return await ctx.prisma.post.findMany({
+        orderBy: {
+          id: 'desc',
+        },
+      });
     },
   })
   .query('getPost', {
@@ -52,6 +56,8 @@ export const postRouter = createRouter()
       published: z.boolean(),
     }),
     async resolve({ input, ctx }) {
+      console.log('input====', input);
+
       const post = await ctx.prisma.post.create({
         data: input,
         select: defaultPostSelect,

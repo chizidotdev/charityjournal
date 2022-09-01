@@ -26,8 +26,6 @@ const CreatePost = () => {
       return alert('You must be logged in to create a post');
     }
 
-    console.log('data====', data);
-
     const input: FormValues = {
       title: data.title,
       published: data.published,
@@ -73,7 +71,13 @@ const CreatePost = () => {
 
                 <label>
                   Cover Photo:
-                  <Input type='file' placeholder='Select Image' border={'none'} padding={'none'} />
+                  <Input
+                    type='file'
+                    placeholder='Select Image'
+                    border={'none'}
+                    padding={'none'}
+                    // {...register('image')}
+                  />
                 </label>
               </div>
 
