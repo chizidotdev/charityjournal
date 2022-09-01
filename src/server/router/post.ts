@@ -23,6 +23,15 @@ export const postRouter = createRouter()
       });
     },
   })
+  .query('getPublishedPosts', {
+    async resolve({ ctx }) {
+      return await ctx.prisma.post.findMany({
+        where: {
+          published: true,
+        },
+      });
+    },
+  })
   .query('getPost', {
     input: z.object({
       id: z.number(),
