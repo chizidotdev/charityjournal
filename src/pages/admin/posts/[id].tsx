@@ -1,4 +1,4 @@
-import { Divider, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -72,7 +72,7 @@ const Post = () => {
           </div>
 
           <h1 className='heading-2 md:text-center lg:px-10'>{data?.title}</h1>
-          <p className='caption-sm text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
+          <p className='heading-4 text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
         </VStack>
 
         {/* Content */}

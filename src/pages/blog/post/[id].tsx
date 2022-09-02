@@ -1,4 +1,4 @@
-import { Divider, Flex, HStack, VStack, Text } from '@chakra-ui/react';
+import { Flex, HStack, VStack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
