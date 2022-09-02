@@ -1,6 +1,7 @@
 import { createRouter } from './context';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
+import { createProtectedRouter } from './protected-router';
 
 export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
   id: true,
@@ -92,16 +93,17 @@ export const postRouter = createRouter()
         select: defaultPostSelect,
       });
     },
-  })
-  .mutation('deletePost', {
-    input: z.object({
-      postId: z.number(),
-    }),
-    async resolve({ input, ctx }) {
-      await ctx.prisma.post.delete({
-        where: { id: input.postId },
-      });
-
-      return 'success';
-    },
   });
+
+export const protectedPostRouter = createProtectedRouter().mutation('deletePost', {
+  input: z.object({
+    postId: z.number(),
+  }),
+  async resolve({ input, ctx }) {
+    await ctx.prisma.post.delete({
+      where: { id: input.postId },
+    });
+
+    return 'success';
+  },
+});

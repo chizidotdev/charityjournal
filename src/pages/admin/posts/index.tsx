@@ -36,8 +36,6 @@ const Posts = () => {
   }
 
   if (data) {
-    data.map((post) => <PostItem key={post.id} post={post} />);
-
     posts = (
       <>
         {data.length === 0 ? (
@@ -103,9 +101,12 @@ interface PostItemProps {
 }
 
 const PostItem = ({ post }: PostItemProps) => {
-  const deletePost = trpc.useMutation(['post.deletePost']);
+  const deletePost = trpc.useMutation(['protected.deletePost']);
 
-  const handleDelete = () => deletePost.mutate({ postId: post.id });
+  const handleDelete = () => {
+    deletePost.mutate({ postId: post.id });
+    deletePost.isError && console.log(deletePost.error.message);
+  };
 
   return (
     <Tbody fontSize={'sm'}>
