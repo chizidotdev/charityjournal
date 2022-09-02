@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { FiClock } from 'react-icons/fi';
 import AdminLayout from '../../../components/UI/AdminLayout';
 import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
@@ -58,15 +59,16 @@ const Post = () => {
 
           <div className='w-full flex items-center justify-between py-2'>
             <div className='text-xs opacity-50 flex items-center gap-2'>
-              <span>Aug 15</span>
-              <Divider width={3} borderColor='#373435' />
-              <span>5 min read</span>
+              <FiClock />
+              <span>
+                {data.updatedAt.toDateString()} at {data.updatedAt.toLocaleTimeString()}
+              </span>
             </div>
 
-            <div className='flex items-center gap-5'>
+            {/* <div className='flex items-center gap-5'>
               <Divider width={10} borderColor='#d5d5d5' />
               <span className='uppercase opacity-50 text-xs'>by John Doe</span>
-            </div>
+            </div> */}
           </div>
 
           <h1 className='heading-2 md:text-center lg:px-10'>{data?.title}</h1>
@@ -76,14 +78,14 @@ const Post = () => {
         {/* Content */}
         <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 0, md: 8, xl: '10%' }}>
           <HStack justify='space-between' align='flex-start' gap={8}>
-            <Divider
+            {/* <Divider
               display={{ base: 'none', md: 'flex' }}
               mt={5}
               orientation='vertical'
               height={40}
               borderColor='#373435'
-            />
-            <div id='body-admin' className='w-full'></div>
+            /> */}
+            <div id='body-admin' className='w-full text-left'></div>
           </HStack>
         </VStack>
       </section>

@@ -1,9 +1,10 @@
-import { Box, Divider, Flex, HStack, VStack, Text } from '@chakra-ui/react';
+import { Divider, Flex, HStack, VStack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { Content } from '../../../components/Blog';
+import { FiClock } from 'react-icons/fi';
+// import { Content } from '../../../components/Blog';
 import Footer from '../../../components/Footer';
 import Layout from '../../../components/UI/MainLayout';
 import { trpc } from '../../../utils/trpc';
@@ -20,8 +21,6 @@ const Post = () => {
     if (body) {
       body.innerHTML = data?.content || '';
     }
-
-    console.log('data====', data?.content);
   }, [data]);
 
   let post: JSX.Element = <div></div>;
@@ -50,32 +49,34 @@ const Post = () => {
             <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
           </div>
 
-          {/* <div className='w-full flex items-center justify-between py-2'>
+          <div className='w-full flex items-center justify-between py-2'>
             <div className='text-xs opacity-50 flex items-center gap-2'>
-              <span>Aug 15</span>
-              <Divider width={3} borderColor='#373435' />
-              <span>5 min read</span>
+              <FiClock />
+              <span>
+                {data.updatedAt.toDateString()} at {data.updatedAt.toLocaleTimeString()}
+              </span>
             </div>
 
-            <div className='flex items-center gap-5'>
+            {/* <div className='flex items-center gap-5'>
               <Divider width={10} borderColor='#d5d5d5' />
               <span className='uppercase opacity-50 text-xs'>by John Doe</span>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
 
-          <h1 className='heading-2 md:text-center lg:px-10 md:py-5'>{data.title}</h1>
+          <h1 className='heading-2 md:text-center lg:px-10'>{data.title}</h1>
+          <p className='heading-4 text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
         </VStack>
 
         {/* Content */}
         <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 0, md: 8, xl: '10%' }}>
           <HStack justify='space-between' align='flex-start' gap={8}>
-            <Divider
+            {/* <Divider
               display={{ base: 'none', md: 'flex' }}
               mt={5}
               orientation='vertical'
               height={40}
               borderColor='#373435'
-            />
+            /> */}
             <div id='body-user' className='w-full'></div>
           </HStack>
         </VStack>
@@ -92,7 +93,7 @@ const Post = () => {
         {/* Tags */}
 
         {/* Read More */}
-        <Box py={10}>
+        {/* <Box py={10}>
           <div className=''>
             <div>
               <Divider borderColor='#d5d5d5' />
@@ -108,7 +109,7 @@ const Post = () => {
 
           <Content layout='horizontal' />
           <Content layout='horizontal' />
-        </Box>
+        </Box> */}
       </div>
 
       <section>
