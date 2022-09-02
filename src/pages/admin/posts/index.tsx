@@ -11,16 +11,24 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../../components/UI/AdminLayout';
 import PostCtx from '../../../context/post-context';
+import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
 
 interface PostTypeProps {
   name: string;
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return requireAuth(context, (session) => {
+    return { props: { session } };
+  });
+};
 
 const Posts = () => {
   const { isLoading, posts: data } = useContext(PostCtx);

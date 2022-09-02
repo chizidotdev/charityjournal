@@ -1,9 +1,17 @@
 import { Divider, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import AdminLayout from '../../../components/UI/AdminLayout';
+import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return requireAuth(context, (session) => {
+    return { props: { session } };
+  });
+};
 
 const Post = () => {
   const router = useRouter();

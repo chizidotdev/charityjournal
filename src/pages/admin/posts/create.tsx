@@ -1,9 +1,11 @@
 import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Editor from '../../../components/Draft';
 import AdminLayout from '../../../components/UI/AdminLayout';
+import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
 
 interface FormValues {
@@ -13,6 +15,12 @@ interface FormValues {
   published: boolean;
   authorId: string;
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return requireAuth(context, (session) => {
+    return { props: { session } };
+  });
+};
 
 const CreatePost = () => {
   const [content, setContent] = useState('');
