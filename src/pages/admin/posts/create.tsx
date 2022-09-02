@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const CreatePost = () => {
   const [content, setContent] = useState('');
 
-  const createPost = trpc.useMutation(['post.createPost']);
+  const createPost = trpc.useMutation(['protected.createPost']);
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<FormValues>();
 

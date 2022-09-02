@@ -56,23 +56,19 @@ export const postRouter = createRouter()
         },
       });
     },
-  })
-  .mutation('createPost', {
+  });
+
+export const protectedPostRouter = createProtectedRouter()
+  .mutation('deletePost', {
     input: z.object({
-      title: z.string(),
-      excerpt: z.string(),
-      content: z.string(),
-      authorId: z.string(),
-      published: z.boolean(),
+      postId: z.number(),
     }),
     async resolve({ input, ctx }) {
-      console.log('input====', input);
-
-      const post = await ctx.prisma.post.create({
-        data: input,
-        select: defaultPostSelect,
+      await ctx.prisma.post.delete({
+        where: { id: input.postId },
       });
-      return post;
+
+      return 'success';
     },
   })
   .mutation('updatePost', {
@@ -93,17 +89,22 @@ export const postRouter = createRouter()
         select: defaultPostSelect,
       });
     },
+  })
+  .mutation('createPost', {
+    input: z.object({
+      title: z.string(),
+      excerpt: z.string(),
+      content: z.string(),
+      authorId: z.string(),
+      published: z.boolean(),
+    }),
+    async resolve({ input, ctx }) {
+      console.log('input====', input);
+
+      const post = await ctx.prisma.post.create({
+        data: input,
+        select: defaultPostSelect,
+      });
+      return post;
+    },
   });
-
-export const protectedPostRouter = createProtectedRouter().mutation('deletePost', {
-  input: z.object({
-    postId: z.number(),
-  }),
-  async resolve({ input, ctx }) {
-    await ctx.prisma.post.delete({
-      where: { id: input.postId },
-    });
-
-    return 'success';
-  },
-});

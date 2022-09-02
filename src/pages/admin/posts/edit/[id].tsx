@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const EditPost = () => {
   const [content, setContent] = useState('');
   const router = useRouter();
-  const editPost = trpc.useMutation(['post.updatePost']);
+  const editPost = trpc.useMutation(['protected.updatePost']);
   const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }], {
     refetchOnWindowFocus: false,
   });
