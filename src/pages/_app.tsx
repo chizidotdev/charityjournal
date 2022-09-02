@@ -1,6 +1,7 @@
 // src/pages/_app.tsx
 import '../styles/main.scss';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { withTRPC } from '@trpc/next';
 import type { AppRouter } from '../server/router';
 import type { AppType } from 'next/dist/shared/lib/utils';
@@ -8,19 +9,24 @@ import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
+import { PostProvider } from '../context/post-context';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <ChakraProvider>
       <SessionProvider session={session}>
-        <Head>
-          <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-          <title>Charity Journal | Telling the story of good deeds</title>
-          <meta name='description' content='Charity Journal | Telling the story of good deeds' />
-          <link rel='icon' href='/logob-sec.png' />
-        </Head>
+        <PostProvider>
+          <Head>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+            <title>Charity Journal | Telling the story of good deeds</title>
+            <meta name='description' content='Charity Journal | Telling the story of good deeds' />
+            <link rel='icon' href='/logob-sec.png' />
+          </Head>
 
-        <Component {...pageProps} />
+          <Component {...pageProps} />
+          <ToastContainer />
+        </PostProvider>
       </SessionProvider>
     </ChakraProvider>
   );

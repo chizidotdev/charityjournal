@@ -12,8 +12,10 @@ import {
 } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import AdminLayout from '../../../components/UI/AdminLayout';
+import PostCtx from '../../../context/post-context';
 import { trpc } from '../../../utils/trpc';
 
 interface PostTypeProps {
@@ -21,18 +23,12 @@ interface PostTypeProps {
 }
 
 const Posts = () => {
-  const { data, isLoading, isError } = trpc.useQuery(['post.getAllPosts'], {
-    refetchOnWindowFocus: false,
-  });
+  const { isLoading, posts: data } = useContext(PostCtx);
 
   let posts: JSX.Element = <div></div>;
 
   if (isLoading) {
     posts = <p>Loading...</p>;
-  }
-
-  if (isError) {
-    posts = <p>Error loading posts...</p>;
   }
 
   if (data) {
@@ -104,8 +100,17 @@ const PostItem = ({ post }: PostItemProps) => {
   const deletePost = trpc.useMutation(['protected.deletePost']);
 
   const handleDelete = () => {
-    deletePost.mutate({ postId: post.id });
-    deletePost.isError && console.log(deletePost.error.message);
+    deletePost.mutate(
+      { postId: post.id },
+      {
+        onSuccess: () => {
+          toast('User deleted successfully', { type: 'success' });
+        },
+        onError: (error) => {
+          toast(error.message, { type: 'error' });
+        },
+      }
+    );
   };
 
   return (
