@@ -13,10 +13,9 @@ import {
 import { Post } from '@prisma/client';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../../components/UI/AdminLayout';
-import PostCtx from '../../../context/post-context';
 import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
 
@@ -31,7 +30,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Posts = () => {
-  const { isLoading, posts: data } = useContext(PostCtx);
+  const { data, isLoading, isError } = trpc.useQuery(['post.getAllPosts'], {
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
+
+  if (isError) toast('Error loading posts... Please refresh.', { type: 'error' });
 
   let posts: JSX.Element = <div></div>;
 

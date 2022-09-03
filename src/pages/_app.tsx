@@ -10,23 +10,20 @@ import { SessionProvider } from 'next-auth/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
-import { PostProvider } from '../context/post-context';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <ChakraProvider>
       <SessionProvider session={session}>
-        <PostProvider>
-          <Head>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-            <title>Charity Journal | Telling the story of good deeds</title>
-            <meta name='description' content='Charity Journal | Telling the story of good deeds' />
-            <link rel='icon' href='/logob-sec.png' />
-          </Head>
+        <Head>
+          <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+          <title>Charity Journal | Telling the story of good deeds</title>
+          <meta name='description' content='Charity Journal | Telling the story of good deeds' />
+          <link rel='icon' href='/logob-sec.png' />
+        </Head>
 
-          <Component {...pageProps} />
-          <ToastContainer />
-        </PostProvider>
+        <Component {...pageProps} />
+        <ToastContainer />
       </SessionProvider>
     </ChakraProvider>
   );
