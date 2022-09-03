@@ -1,12 +1,17 @@
-import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
-import React, { useState } from 'react';
+
+import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import Editor from '../../../components/Draft';
 import AdminLayout from '../../../components/UI/AdminLayout';
+
 import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
+import getImageUrl from '../../../utils/getImageUrl';
+import { useRouter } from 'next/router';
 
 interface FormValues {
   title: string;
@@ -14,6 +19,7 @@ interface FormValues {
   excerpt: string;
   published: boolean;
   authorId: string;
+  image: string;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -24,27 +30,39 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const CreatePost = () => {
   const [content, setContent] = useState('');
+  const [image, setImage] = useState<File | undefined>();
 
   const createPost = trpc.useMutation(['protected.createPost']);
   const { data: session } = useSession();
   const { register, handleSubmit } = useForm<FormValues>();
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!session) {
-      return alert('You must be logged in to create a post');
+      return toast('You must be logged in to create a post');
     }
+
+    if (!image) {
+      return toast('Upload a cover image', { type: 'warning' });
+    }
+
+    const imageUrl = await getImageUrl(image);
 
     const input: FormValues = {
       title: data.title,
       published: data.published,
       excerpt: data.excerpt,
       content,
+      image: imageUrl,
       authorId: session.id as string,
     };
 
-    console.log('input====', input);
-
-    createPost.mutate(input);
+    createPost.mutate(input, {
+      onSuccess: () => {
+        toast('Post created successfully', { type: 'success' });
+        router.push('/admin/posts');
+      },
+    });
   };
 
   return (
@@ -84,7 +102,9 @@ const CreatePost = () => {
                     placeholder='Select Image'
                     border={'none'}
                     padding={'none'}
-                    // {...register('image')}
+                    onChange={(e) => {
+                      e.target.files && setImage(e.target.files[0]);
+                    }}
                   />
                 </label>
               </div>

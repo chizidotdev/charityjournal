@@ -43,7 +43,7 @@ model User {
 model Post {
   id        Int      @id @default(autoincrement())
   title     String   @db.VarChar(255)
-  image     String?  @db.Text
+  image     String  @db.Text
   excerpt   String   @db.Text
   content   String   @db.LongText
   published Boolean  @default(false)

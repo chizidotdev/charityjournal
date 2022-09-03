@@ -8,12 +8,15 @@ import Editor from '../../../../components/Draft';
 import AdminLayout from '../../../../components/UI/AdminLayout';
 import { requireAuth } from '../../../../utils/requireAuth';
 import { trpc } from '../../../../utils/trpc';
+import getImageUrl from '../../../../utils/getImageUrl';
+import { toast } from 'react-toastify';
 
 interface FormValues {
   id: number;
   title: string;
   content: string;
   excerpt: string;
+  image: string;
   published: boolean;
   authorId: string;
 }
@@ -26,6 +29,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const EditPost = () => {
   const [content, setContent] = useState('');
+  const [image, setImage] = useState<File | undefined>();
+
   const router = useRouter();
   const editPost = trpc.useMutation(['protected.updatePost']);
   const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }], {
@@ -44,23 +49,36 @@ const EditPost = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!session) {
       return alert('You must be logged in to create a post');
     }
 
-    const input: FormValues = {
+    let input: FormValues = {
       id: Number(router.query.id),
       title: data.title,
       published: data.published,
       excerpt: data.excerpt,
       content,
+      image: data.image,
       authorId: session.id as string,
     };
 
-    console.log('input====', input);
+    if (image) {
+      const imageUrl = await getImageUrl(image);
 
-    editPost.mutate(input);
+      input = {
+        ...input,
+        image: imageUrl,
+      };
+    }
+
+    editPost.mutate(input, {
+      onSuccess: () => {
+        toast(`Post edited successfully`, { type: 'success' });
+        router.push('/admin/posts');
+      },
+    });
   };
 
   return (
@@ -97,7 +115,15 @@ const EditPost = () => {
 
                 <label>
                   Cover Photo:
-                  <Input type='file' placeholder='Select Image' border={'none'} padding={'none'} />
+                  <Input
+                    type='file'
+                    placeholder='Select Image'
+                    border={'none'}
+                    padding={'none'}
+                    onChange={(e) => {
+                      e.target.files && setImage(e.target.files[0]);
+                    }}
+                  />
                 </label>
               </div>
 

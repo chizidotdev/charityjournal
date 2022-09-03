@@ -7,6 +7,7 @@ export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
   id: true,
   title: true,
   content: true,
+  image: true,
   published: true,
   author: true,
   authorId: true,
@@ -76,6 +77,7 @@ export const protectedPostRouter = createProtectedRouter()
       id: z.number(),
       title: z.string(),
       excerpt: z.string(),
+      image: z.string(),
       content: z.string(),
       authorId: z.string(),
       published: z.boolean(),
@@ -94,6 +96,7 @@ export const protectedPostRouter = createProtectedRouter()
     input: z.object({
       title: z.string(),
       excerpt: z.string(),
+      image: z.string(),
       content: z.string(),
       authorId: z.string(),
       published: z.boolean(),

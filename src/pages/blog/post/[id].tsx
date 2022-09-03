@@ -46,7 +46,7 @@ const Post = () => {
       <>
         <VStack align='center' px={{ base: 2, md: 12, lg: '14%' }}>
           <div className='relative self-center w-full h-52 md:h-60 lg:h-72 rounded-md overflow-hidden'>
-            <Image src='/unsplash.png' alt='' layout='fill' objectFit='cover' />
+            <Image src={data.image || ''} alt='' layout='fill' objectFit='cover' />
           </div>
 
           <div className='w-full flex items-center justify-between py-2'>
