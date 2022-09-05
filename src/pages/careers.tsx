@@ -1,12 +1,13 @@
 import React from 'react';
+import Layout from '../components/UI/MainLayout';
 
 const Careers = () => {
   return (
-    <div>
-      <section className='container'>
-        <h1 className='heading-1'>Find Charity Jobs for you.</h1>
+    <Layout>
+      <section className='container py-10'>
+        <h1 className='heading-2'>Coming soon...</h1>
       </section>
-    </div>
+    </Layout>
   );
 };
 

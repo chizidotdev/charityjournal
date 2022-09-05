@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../Footer';
 import Navbar from './Navbar';
 
 interface LayoutProps {
@@ -11,7 +12,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className='sticky top-0 z-10'>
         <Navbar />
       </div>
-      {children}
+      <div className='min-h-[40vh]'>{children}</div>
+      <section>
+        <Footer />
+      </section>
     </>
   );
 };

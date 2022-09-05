@@ -1,7 +1,6 @@
 import { Divider, Flex } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import React from 'react';
-import Footer from '../../components/Footer';
 import { Content } from '../../components/Blog';
 import Banner from '../../components/Blog/Banner';
 import Layout from '../../components/UI/MainLayout';
@@ -56,9 +55,6 @@ const Trending: NextPage = () => {
             <Divider borderColor='#d5d5d5' />
           </div>
         </div>
-      </section>
-      <section>
-        <Footer />
       </section>
     </Layout>
   );
