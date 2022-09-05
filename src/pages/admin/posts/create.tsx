@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 
 import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
@@ -8,7 +7,6 @@ import { toast } from 'react-toastify';
 import Editor from '../../../components/Draft';
 import AdminLayout from '../../../components/UI/AdminLayout';
 
-import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
 import getImageUrl from '../../../utils/getImageUrl';
 import { useRouter } from 'next/router';
@@ -22,18 +20,12 @@ interface FormValues {
   image: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return requireAuth(context, (session) => {
-    return { props: { session } };
-  });
-};
-
 const CreatePost = () => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | undefined>();
 
   const createPost = trpc.useMutation(['protected.createPost']);
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
   const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
 

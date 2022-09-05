@@ -1,12 +1,10 @@
 import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Editor from '../../../../components/Draft';
 import AdminLayout from '../../../../components/UI/AdminLayout';
-import { requireAuth } from '../../../../utils/requireAuth';
 import { trpc } from '../../../../utils/trpc';
 import getImageUrl from '../../../../utils/getImageUrl';
 import { toast } from 'react-toastify';
@@ -21,13 +19,8 @@ interface FormValues {
   authorId: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return requireAuth(context, (session) => {
-    return { props: { session } };
-  });
-};
-
 const EditPost = () => {
+  useSession({ required: true });
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | undefined>();
 

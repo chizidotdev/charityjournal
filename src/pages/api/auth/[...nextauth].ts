@@ -1,5 +1,7 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import { env } from '../../../env/server.mjs';
 
 // Prisma adapter for NextAuth, optional and can be removed
 // import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -49,6 +51,10 @@ export const authOptions: NextAuthOptions = {
 
         return null;
       },
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   // pages: {

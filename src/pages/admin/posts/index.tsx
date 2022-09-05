@@ -11,25 +11,20 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
-import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../../components/UI/AdminLayout';
-import { requireAuth } from '../../../utils/requireAuth';
 import { trpc } from '../../../utils/trpc';
 
 interface PostTypeProps {
   name: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  return requireAuth(context, (session) => {
-    return { props: { session } };
-  });
-};
-
 const Posts = () => {
+  useSession({ required: true });
+
   const { data, isLoading, isError } = trpc.useQuery(['post.getAllPosts'], {
     refetchOnWindowFocus: false,
     staleTime: Infinity,

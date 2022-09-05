@@ -1,5 +1,6 @@
 import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -15,6 +16,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const Post = () => {
+  useSession({ required: true });
+
   const router = useRouter();
   const { data, isLoading, isError } = trpc.useQuery(
     ['post.getPost', { id: Number(router.query.id) }],
