@@ -23,6 +23,7 @@ const EditPost = () => {
   useSession({ required: true });
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | undefined>();
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const editPost = trpc.useMutation(['protected.updatePost']);
@@ -42,10 +43,19 @@ const EditPost = () => {
     },
   });
 
+  if (getPost.status === 'error') {
+    return (
+      <AdminLayout pageTitle='Error'>
+        <div className='container'>Error fetching post</div>
+      </AdminLayout>
+    );
+  }
+
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!session) {
       return alert('You must be logged in to create a post');
     }
+    setLoading(true);
 
     let input: FormValues = {
       id: Number(router.query.id),
@@ -53,7 +63,7 @@ const EditPost = () => {
       published: data.published,
       excerpt: data.excerpt,
       content,
-      image: data.image,
+      image: getPost?.data?.image || '',
       authorId: session.id as string,
     };
 
@@ -71,7 +81,11 @@ const EditPost = () => {
         toast(`Post edited successfully`, { type: 'success' });
         router.push('/admin/posts');
       },
+      onError: (error) => {
+        toast(error.message, { type: 'error' });
+      },
     });
+    setLoading(false);
   };
 
   return (
@@ -120,7 +134,7 @@ const EditPost = () => {
                 </label>
               </div>
 
-              <Button type='submit' my={5} className='w-32'>
+              <Button type='submit' my={5} className='w-32' isLoading={loading}>
                 Submit
               </Button>
             </form>
