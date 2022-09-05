@@ -16,6 +16,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import AdminLayout from '../../../components/UI/AdminLayout';
+import Modal from '../../../components/UI/Modal';
 import { trpc } from '../../../utils/trpc';
 
 interface PostTypeProps {
@@ -104,6 +105,7 @@ interface PostItemProps {
 
 const PostItem = ({ post }: PostItemProps) => {
   const deletePost = trpc.useMutation(['protected.deletePost']);
+  const [open, setOpen] = useState(false);
 
   const handleDelete = () => {
     deletePost.mutate(
@@ -121,6 +123,13 @@ const PostItem = ({ post }: PostItemProps) => {
 
   return (
     <Tbody fontSize={'sm'}>
+      <Modal
+        title='Delete Post'
+        description='Are you sure you want to delete this post?'
+        callback={handleDelete}
+        open={open}
+        setOpen={setOpen}
+      />
       <Tr>
         <Td isNumeric>{post.id}.</Td>
         <Td>
@@ -142,7 +151,7 @@ const PostItem = ({ post }: PostItemProps) => {
             </div>
           </Link>
 
-          <div onClick={handleDelete} className='cursor-pointer hover:text-[#1db3a6]'>
+          <div onClick={() => setOpen(true)} className='cursor-pointer hover:text-[#1db3a6]'>
             <DeleteIcon />
           </div>
         </Td>
