@@ -1,5 +1,7 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import { env } from '../../../env/server.mjs';
 
 // Prisma adapter for NextAuth, optional and can be removed
 // import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -21,36 +23,60 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    async signIn({ account, profile }) {
+      if (account.provider === 'google') {
+        // Check if user exists in database
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        if (existingUser) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
   },
   // adapter: PrismaAdapter(prisma),
   providers: [
-    // ...add more providers here
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       name: 'Username',
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'Enter username' },
-        password: { label: 'Password', type: 'password', placeholder: 'Enter password' },
+        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
-        if (credentials?.username === 'admin' && credentials.password === 'admin') {
-          const user = await prisma.user.findUnique({
+      authorize: async (credentials) => {
+        if (credentials?.username === 'admin' && credentials?.password === 'admin') {
+          const user = await prisma.user.findFirst({
             where: {
               name: credentials.username,
             },
           });
-
           if (user) {
             return user;
+          } else {
+            return null;
           }
-
-          throw new Error("User doesn't exist");
         }
-
         return null;
       },
     }),
   ],
+  theme: {
+    colorScheme: 'auto', // "auto" | "dark" | "light"
+    brandColor: '#1db3a6', // Hex color code
+    logo: '/charity.png', // Absolute URL to image
+    buttonText: '', // Hex color code
+  },
   // pages: {
   //   signIn: '/signin',
   // },

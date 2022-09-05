@@ -1,61 +1,84 @@
-import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
-
 import { Button, Checkbox, Input, Textarea } from '@chakra-ui/react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
-import Editor from '../../../components/Draft';
-import AdminLayout from '../../../components/UI/AdminLayout';
-
-import { trpc } from '../../../utils/trpc';
-import getImageUrl from '../../../utils/getImageUrl';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Editor from '../../../../components/Draft';
+import AdminLayout from '../../../../components/UI/AdminLayout';
+import { trpc } from '../../../../utils/trpc';
+import getImageUrl from '../../../../utils/getImageUrl';
+import { toast } from 'react-toastify';
 
 interface FormValues {
+  id: number;
   title: string;
   content: string;
   excerpt: string;
+  image: string;
   published: boolean;
   authorId: string;
-  image: string;
 }
 
-const CreatePost = () => {
+const EditPost = () => {
+  useSession({ required: true });
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | undefined>();
   const [loading, setLoading] = useState(false);
 
-  const createPost = trpc.useMutation(['protected.createPost']);
-  // const user = trpc.useQuery(['user.getUser', {email: session.email}]);
-  const { data: session } = useSession({ required: true });
-
-  const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
+  const editPost = trpc.useMutation(['protected.updatePost']);
+  const getPost = trpc.useQuery(['post.getPost', { id: Number(router.query.id) }], {
+    refetchOnWindowFocus: false,
+  });
+
+  const { data: session } = useSession();
+  const { register, handleSubmit } = useForm<FormValues>({
+    defaultValues: {
+      id: Number(router.query.id),
+      title: getPost.data?.title,
+      excerpt: getPost.data?.excerpt,
+      content: getPost.data?.content,
+      published: getPost.data?.published,
+      authorId: '',
+    },
+  });
+
+  if (getPost.status === 'error') {
+    return (
+      <AdminLayout pageTitle='Error'>
+        <div className='container'>Error fetching post</div>
+      </AdminLayout>
+    );
+  }
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!session) {
-      return toast.error('You must be logged in to create a post', { type: 'warning' });
+      return alert('You must be logged in to create a post');
     }
-
-    if (!image) {
-      return toast('Upload a cover image', { type: 'warning' });
-    }
-
     setLoading(true);
-    const imageUrl = await getImageUrl(image);
 
-    const input: FormValues = {
+    let input: FormValues = {
+      id: Number(router.query.id),
       title: data.title,
       published: data.published,
       excerpt: data.excerpt,
       content,
-      image: imageUrl,
+      image: getPost?.data?.image || '',
       authorId: session.id as string,
     };
 
-    createPost.mutate(input, {
+    if (image) {
+      const imageUrl = await getImageUrl(image);
+
+      input = {
+        ...input,
+        image: imageUrl,
+      };
+    }
+
+    editPost.mutate(input, {
       onSuccess: () => {
-        toast('Post created successfully', { type: 'success' });
+        toast(`Post edited successfully`, { type: 'success' });
         router.push('/admin/posts');
       },
       onError: (error) => {
@@ -66,39 +89,40 @@ const CreatePost = () => {
   };
 
   return (
-    <AdminLayout pageTitle='Write New Post'>
+    <AdminLayout pageTitle='Edit Post'>
       <div className='container py-5'>
         <section className='max-w-3xl'>
           <div className='py-5 flex flex-col gap-10'>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-5'>
-              {/* register your input into the hook by invoking the "register" function */}
               <label>
                 Title:
-                <Input {...register('title', { required: true })} />
+                <Input defaultValue={getPost.data?.title || ''} {...register('title')} />
               </label>
 
               <label>
                 Excerpt:
-                <Textarea {...register('excerpt', { required: true })} />
+                <Textarea defaultValue={getPost.data?.excerpt || ''} {...register('excerpt')} />
               </label>
 
-              {/* include validation with required or other standard HTML validation rules */}
               <label>
                 Content:
-                {/* <Input {...register('content', { required: true })} /> */}
-                <Editor setContent={setContent} />
+                <Editor content={getPost.data?.content} setContent={setContent} editing />
               </label>
 
               <div className='flex flex-col-reverse gap-5 md:flex-row justify-between'>
                 <label className='flex items-center gap-5'>
                   Publish:
-                  <Checkbox {...register('published')} size={'lg'} borderColor={'#5f5e5e'} />
+                  <Checkbox
+                    defaultChecked={getPost.data?.published}
+                    {...register('published')}
+                    size={'lg'}
+                    borderColor={'#5f5e5e'}
+                  />
                 </label>
 
                 <label>
                   Cover Photo:
                   <Input
-                    required
                     type='file'
                     placeholder='Select Image'
                     border={'none'}
@@ -121,4 +145,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default EditPost;

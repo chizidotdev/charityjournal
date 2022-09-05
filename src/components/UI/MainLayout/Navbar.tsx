@@ -86,7 +86,7 @@ export default function Navbar() {
                   cursor={'pointer'}
                   minW={0}
                 >
-                  <Avatar size={'sm'} src='' />
+                  <Avatar size={'sm'} src={session?.user?.image || ''} />
                 </MenuButton>
                 <MenuList>
                   {session ? (

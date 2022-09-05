@@ -36,16 +36,16 @@ enum JobLocation {
 model User {
   id    String @id @default(uuid())
   name  String @unique
-  email String
+  email String @unique
   posts Post[]
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String   @db.VarChar(255)
-  image     String?  @db.VarChar(255)
-  excerpt   String?
-  content   String?
+  image     String   @db.Text
+  excerpt   String   @db.Text
+  content   String   @db.LongText
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
@@ -77,3 +77,9 @@ model Job {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 }
+
+// model StaticInfo {
+//   id        Int      @id @default(autoincrement())
+//   title     String   @db.VarChar(255)
+//   content   String?
+// }

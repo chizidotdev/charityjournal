@@ -1,6 +1,7 @@
 // src/pages/_app.tsx
 import '../styles/main.scss';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { withTRPC } from '@trpc/next';
 import type { AppRouter } from '../server/router';
 import type { AppType } from 'next/dist/shared/lib/utils';
@@ -8,6 +9,7 @@ import superjson from 'superjson';
 import { SessionProvider } from 'next-auth/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
 const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
@@ -21,6 +23,7 @@ const MyApp: AppType = ({ Component, pageProps: { session, ...pageProps } }) => 
         </Head>
 
         <Component {...pageProps} />
+        <ToastContainer />
       </SessionProvider>
     </ChakraProvider>
   );
@@ -33,12 +36,15 @@ const getBaseUrl = () => {
 };
 
 export default withTRPC<AppRouter>({
-  config() {
+  config({ ctx }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
      */
     const url = `${getBaseUrl()}/api/trpc`;
+
+    const ONE_DAY_SECONDS = 60 * 60 * 24;
+    ctx?.res?.setHeader('Cache-Control', `s-maxage=1, stale-while-revalidate=${ONE_DAY_SECONDS}`);
 
     return {
       url,

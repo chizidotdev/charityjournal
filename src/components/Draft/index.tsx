@@ -1,6 +1,6 @@
-import { convertToRaw, EditorState } from 'draft-js';
+import { ContentState, convertFromHTML, convertToRaw, EditorState } from 'draft-js';
 import dynamic from 'next/dynamic';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { EditorProps } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 
@@ -10,11 +10,36 @@ const Editor = dynamic<EditorProps>(() => import('react-draft-wysiwyg').then((mo
 
 interface EditorComponentProps {
   setContent: Dispatch<SetStateAction<string>>;
+  editing?: boolean;
+  content?: string | null;
 }
 
-const EditorComponent: React.FC<EditorComponentProps> = ({ setContent }) => {
+const EditorComponent: React.FC<EditorComponentProps> = ({ setContent, editing, content }) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  useEffect(() => {
+    function updateEditor() {
+      setEditorState(
+        editing && content
+          ? () => {
+              const blocksFromHTML = convertFromHTML(content);
+              const contentState = ContentState.createFromBlockArray(
+                blocksFromHTML.contentBlocks,
+                blocksFromHTML.entityMap
+              );
+              return EditorState.createWithContent(contentState);
+            }
+          : EditorState.createEmpty()
+      );
+    }
+    updateEditor();
+  }, [editing, content]);
+
   const rawContentState = convertToRaw(editorState.getCurrentContent());
+
+  useEffect(() => {
+    setContent(draftToHtml(rawContentState));
+  }, [setContent, rawContentState]);
 
   const toolbarOptions: EditorProps['toolbar'] = {
     options: [
@@ -24,9 +49,9 @@ const EditorComponent: React.FC<EditorComponentProps> = ({ setContent }) => {
       'textAlign',
       'colorPicker',
       'link',
-      'embedded',
+      // 'embedded',
       'emoji',
-      'image',
+      // 'image',
       'history',
     ],
     blockType: {

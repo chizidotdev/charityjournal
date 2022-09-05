@@ -1,11 +1,13 @@
 import { createRouter } from './context';
 import { z } from 'zod';
 import { Prisma } from '@prisma/client';
+import { createProtectedRouter } from './protected-router';
 
 export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
   id: true,
   title: true,
   content: true,
+  image: true,
   published: true,
   author: true,
   authorId: true,
@@ -16,7 +18,30 @@ export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
 export const postRouter = createRouter()
   .query('getAllPosts', {
     async resolve({ ctx }) {
-      return await ctx.prisma.post.findMany();
+      return await ctx.prisma.post.findMany({
+        orderBy: {
+          id: 'desc',
+        },
+      });
+    },
+  })
+  .query('getPublishedPosts', {
+    async resolve({ ctx }) {
+      return await ctx.prisma.post.findMany({
+        where: {
+          published: true,
+        },
+      });
+    },
+  })
+  .query('getPost', {
+    input: z.object({
+      id: z.number(),
+    }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.post.findUnique({
+        where: { id: input.id },
+      });
     },
   })
   .query('findPost', {
@@ -32,23 +57,9 @@ export const postRouter = createRouter()
         },
       });
     },
-  })
-  .mutation('createPost', {
-    input: z.object({
-      title: z.string(),
-      excerpt: z.string(),
-      content: z.string(),
-      authorId: z.string(),
-      published: z.boolean(),
-    }),
-    async resolve({ input, ctx }) {
-      const post = await ctx.prisma.post.create({
-        data: input,
-        select: defaultPostSelect,
-      });
-      return post;
-    },
-  })
+  });
+
+export const protectedPostRouter = createProtectedRouter()
   .mutation('deletePost', {
     input: z.object({
       postId: z.number(),
@@ -59,5 +70,44 @@ export const postRouter = createRouter()
       });
 
       return 'success';
+    },
+  })
+  .mutation('updatePost', {
+    input: z.object({
+      id: z.number(),
+      title: z.string(),
+      excerpt: z.string(),
+      image: z.string(),
+      content: z.string(),
+      authorId: z.string(),
+      published: z.boolean(),
+    }),
+    async resolve({ input, ctx }) {
+      return await ctx.prisma.post.update({
+        where: {
+          id: input.id,
+        },
+        data: input,
+        select: defaultPostSelect,
+      });
+    },
+  })
+  .mutation('createPost', {
+    input: z.object({
+      title: z.string(),
+      excerpt: z.string(),
+      image: z.string(),
+      content: z.string(),
+      authorId: z.string(),
+      published: z.boolean(),
+    }),
+    async resolve({ input, ctx }) {
+      console.log('input====', input);
+
+      const post = await ctx.prisma.post.create({
+        data: input,
+        select: defaultPostSelect,
+      });
+      return post;
     },
   });

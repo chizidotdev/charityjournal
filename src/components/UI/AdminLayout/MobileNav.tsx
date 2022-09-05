@@ -12,14 +12,17 @@ import {
   MenuList,
 } from '@chakra-ui/react';
 import { FiMenu } from 'react-icons/fi';
-import { IoMdSettings } from 'react-icons/io';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
   pageTitle: string;
 }
 const MobileNav = ({ pageTitle, onOpen, ...rest }: MobileProps) => {
+  const router = useRouter();
+  const { data: session } = useSession({ required: true });
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -53,23 +56,18 @@ const MobileNav = ({ pageTitle, onOpen, ...rest }: MobileProps) => {
           <Menu>
             <MenuButton transition='all 0.3s' _focus={{ boxShadow: 'none' }}>
               <HStack>
-                <Avatar size={'sm'} />
+                <Avatar size={'sm'} src={session?.user?.image || ''} />
               </HStack>
             </MenuButton>
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
+              <MenuItem onClick={() => router.push('/')}>Home</MenuItem>
               <MenuItem onClick={() => signOut()}>Log out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
-        <IconButton
-          display={{ base: 'none', sm: 'flex' }}
-          variant='ghost'
-          aria-label='open menu'
-          icon={<IoMdSettings />}
-        />
       </HStack>
     </Flex>
   );
