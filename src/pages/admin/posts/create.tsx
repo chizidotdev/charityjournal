@@ -23,21 +23,25 @@ interface FormValues {
 const CreatePost = () => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | undefined>();
+  const [loading, setLoading] = useState(false);
 
   const createPost = trpc.useMutation(['protected.createPost']);
+  // const user = trpc.useQuery(['user.getUser', {email: session.email}]);
   const { data: session } = useSession({ required: true });
+
   const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!session) {
-      return toast('You must be logged in to create a post');
+      return toast.error('You must be logged in to create a post', { type: 'warning' });
     }
 
     if (!image) {
       return toast('Upload a cover image', { type: 'warning' });
     }
 
+    setLoading(true);
     const imageUrl = await getImageUrl(image);
 
     const input: FormValues = {
@@ -54,7 +58,11 @@ const CreatePost = () => {
         toast('Post created successfully', { type: 'success' });
         router.push('/admin/posts');
       },
+      onError: (error) => {
+        toast(error.message, { type: 'error' });
+      },
     });
+    setLoading(false);
   };
 
   return (
@@ -90,6 +98,7 @@ const CreatePost = () => {
                 <label>
                   Cover Photo:
                   <Input
+                    required
                     type='file'
                     placeholder='Select Image'
                     border={'none'}
@@ -101,7 +110,7 @@ const CreatePost = () => {
                 </label>
               </div>
 
-              <Button type='submit' my={5} className='w-32'>
+              <Button type='submit' my={5} className='w-32' isLoading={loading}>
                 Submit
               </Button>
             </form>

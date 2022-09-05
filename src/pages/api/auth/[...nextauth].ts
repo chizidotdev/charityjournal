@@ -1,4 +1,5 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { env } from '../../../env/server.mjs';
 
@@ -46,6 +47,28 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    CredentialsProvider({
+      name: 'Username',
+      credentials: {
+        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
+      },
+      authorize: async (credentials) => {
+        if (credentials?.username === 'admin' && credentials?.password === 'admin') {
+          const user = await prisma.user.findFirst({
+            where: {
+              name: credentials.username,
+            },
+          });
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        }
+        return null;
+      },
     }),
   ],
   theme: {

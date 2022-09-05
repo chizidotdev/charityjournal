@@ -72,11 +72,10 @@ const Posts = () => {
   return (
     <AdminLayout pageTitle='Posts'>
       <div className='lg:py-5 sm:px-5 lg:px-0'>
-        <section className='flex gap-5'>
+        {/* <section className='flex gap-5'>
           <PostType name='All Posts' />
-          {/* <PostType name='Published' /> */}
           <PostType name='Pending' />
-        </section>
+        </section> */}
 
         <section className='flex flex-col gap-3 md:gap-5 py-5 md:py-7'>{posts}</section>
       </div>

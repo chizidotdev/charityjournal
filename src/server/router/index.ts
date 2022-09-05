@@ -3,9 +3,11 @@ import { createRouter } from './context';
 import superjson from 'superjson';
 
 import { postRouter, protectedPostRouter } from './post';
+import { userRouter } from './user';
 
 export const appRouter = createRouter()
   .transformer(superjson)
+  .merge('user.', userRouter)
   .merge('post.', postRouter)
   .merge('protected.', protectedPostRouter);
 
