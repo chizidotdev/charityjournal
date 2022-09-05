@@ -1,5 +1,4 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { env } from '../../../env/server.mjs';
 
@@ -23,40 +22,38 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    async signIn({ account, profile }) {
+      if (account.provider === 'google') {
+        // Check if user exists in database
+        const existingUser = await prisma.user.findFirst({
+          where: {
+            email: profile.email,
+          },
+        });
+
+        if (existingUser) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    },
   },
   // adapter: PrismaAdapter(prisma),
   providers: [
-    // ...add more providers here
-    CredentialsProvider({
-      name: 'Username',
-      // You can pass any HTML attribute to the <input> tag through the object.
-      credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'Enter username' },
-        password: { label: 'Password', type: 'password', placeholder: 'Enter password' },
-      },
-      async authorize(credentials) {
-        if (credentials?.username === 'admin' && credentials.password === 'admin') {
-          const user = await prisma.user.findUnique({
-            where: {
-              name: credentials.username,
-            },
-          });
-
-          if (user) {
-            return user;
-          }
-
-          throw new Error("User doesn't exist");
-        }
-
-        return null;
-      },
-    }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  theme: {
+    colorScheme: 'auto', // "auto" | "dark" | "light"
+    brandColor: '#1db3a6', // Hex color code
+    logo: '/charity.png', // Absolute URL to image
+    buttonText: '', // Hex color code
+  },
   // pages: {
   //   signIn: '/signin',
   // },

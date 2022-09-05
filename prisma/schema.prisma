@@ -36,14 +36,14 @@ enum JobLocation {
 model User {
   id    String @id @default(uuid())
   name  String @unique
-  email String
+  email String @unique
   posts Post[]
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
   title     String   @db.VarChar(255)
-  image     String  @db.Text
+  image     String   @db.Text
   excerpt   String   @db.Text
   content   String   @db.LongText
   published Boolean  @default(false)

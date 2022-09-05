@@ -4,9 +4,13 @@ import Footer from '../components/Footer';
 import SideBar from '../components/Sidebar';
 import Trending from '../components/Blog';
 import Layout from '../components/UI/MainLayout';
+import { useSession } from 'next-auth/react';
 // import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
+  const session = useSession();
+
+  console.log(session);
   // const posts = trpc.useQuery(['post.getAllPosts']);
   // const deletePost = trpc.useMutation(['post.deletePost']);
 
