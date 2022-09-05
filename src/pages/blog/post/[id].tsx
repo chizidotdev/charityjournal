@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { FiClock } from 'react-icons/fi';
 // import { Content } from '../../../components/Blog';
-import Footer from '../../../components/Footer';
 import Layout from '../../../components/UI/MainLayout';
 import { trpc } from '../../../utils/trpc';
 
@@ -111,10 +110,6 @@ const Post = () => {
           <Content layout='horizontal' />
         </Box> */}
       </div>
-
-      <section>
-        <Footer />
-      </section>
     </Layout>
   );
 };

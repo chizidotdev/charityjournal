@@ -1,15 +1,43 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import SideBar from '../components/Sidebar';
-import Trending from '../components/Blog';
+import Trending, { Content } from '../components/Blog';
 import Layout from '../components/UI/MainLayout';
 import { useSession } from 'next-auth/react';
+import { Divider, Flex } from '@chakra-ui/react';
+import { trpc } from '../utils/trpc';
+import Link from 'next/link';
 // import { trpc } from '../utils/trpc';
 
 const Home: NextPage = () => {
-  const session = useSession();
+  const { data, isLoading } = trpc.useQuery(['post.getPublishedPosts'], {
+    refetchOnWindowFocus: false,
+  });
 
-  console.log(session);
+  let news = <div></div>;
+
+  if (isLoading) {
+    news = <div>Loading...</div>;
+  }
+
+  if (data) {
+    if (data.length === 0) {
+      news = (
+        <Flex justify={'center'} py={10}>
+          No posts found...
+        </Flex>
+      );
+    } else {
+      news = (
+        <>
+          {data.map((post) => (
+            <Content key={post.id} image={post.image} layout='horizontal' post={post} />
+          ))}
+        </>
+      );
+    }
+  }
+
   // const posts = trpc.useQuery(['post.getAllPosts']);
   // const deletePost = trpc.useMutation(['post.deletePost']);
 
@@ -71,7 +99,18 @@ const Home: NextPage = () => {
           <div>
             <Trending layout='normal' title='Featured' nolink />
             <div className='py-10' />
-            <Trending layout='horizontal' title='Most Recent' />
+            <div className=''>
+              <div>
+                <Divider borderColor='#d5d5d5' />
+                <div className='flex items-center justify-between py-5'>
+                  <h1 className='heading-2 uppercase'>Latest news</h1>
+                  <div className='link'>{<Link href='/blog'>View all</Link>}</div>
+                </div>
+                <Divider borderColor='#d5d5d5' />
+              </div>
+
+              {news}
+            </div>
           </div>
 
           <div className='hidden lg:block w-2/5'>
