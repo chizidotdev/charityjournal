@@ -75,9 +75,11 @@ export const Content: React.FC<ContentProps> = ({ image, layout, post }) => {
           </p>
 
           <span className='md:mt-4 text-xs opacity-50 flex items-center gap-2'>
-            <span>Aug 15</span>
-            <Divider width={3} borderColor='#373435' />
-            <span>5 min read</span>
+            <span>{post?.updatedAt.toDateString()}</span>
+            {/* <span>{post?.updatedAt.toLocaleDateString()}</span>
+            <span>{post?.updatedAt.toUTCString()}</span> */}
+            {/* <Divider width={3} borderColor='#373435' />
+            <span>5 min read</span> */}
           </span>
         </div>
       </div>
