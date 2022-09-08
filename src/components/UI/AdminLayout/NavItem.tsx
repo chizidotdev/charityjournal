@@ -3,8 +3,8 @@ import { IconType } from 'react-icons';
 
 import { FiEdit } from 'react-icons/fi';
 import { IoIosExit } from 'react-icons/io';
-import { MdLibraryBooks, MdAddToPhotos } from 'react-icons/md';
-import { RiHome5Fill, RiBuildingLine } from 'react-icons/ri';
+import { MdLibraryBooks } from 'react-icons/md';
+import { RiHome5Fill } from 'react-icons/ri';
 
 interface NavItemProps extends FlexProps {
   icon?: IconType;
@@ -76,8 +76,6 @@ export const LinkItems: Array<LinkItemProps> = [
   // },
   { name: 'Posts', icon: MdLibraryBooks, link: '/admin/posts' },
   { name: 'Create Post', icon: FiEdit, link: '/admin/posts/create' },
-  { name: 'Charity', icon: RiBuildingLine, link: '/admin/charity' },
-  { name: 'Add Charity', icon: MdAddToPhotos, link: '/admin/charity/create' },
   {
     name: 'Logout',
     icon: IoIosExit,
