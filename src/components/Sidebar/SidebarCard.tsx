@@ -14,8 +14,7 @@ export const SidebarCard: React.FC<SidebarCardProps> = ({}) => {
       <h1 className='heading-2-sm capitalize text-center'>Career Opportunities</h1>
       <p className='caption-sm'>
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur.
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
       </p>
       <Link href='/'>
         <span className='link-white'>Learn More</span>
