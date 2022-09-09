@@ -15,6 +15,7 @@ interface FormValues {
   content: string;
   excerpt: string;
   image: string;
+  featured: boolean;
   published: boolean;
   authorId: string;
 }
@@ -39,6 +40,7 @@ const EditPost = () => {
       excerpt: getPost.data?.excerpt,
       content: getPost.data?.content,
       published: getPost.data?.published,
+      featured: getPost.data?.featured,
       authorId: '',
     },
   });
@@ -61,6 +63,7 @@ const EditPost = () => {
       id: Number(router.query.id),
       title: data.title,
       published: data.published,
+      featured: data.featured,
       excerpt: data.excerpt,
       content,
       image: getPost?.data?.image || '',
@@ -109,7 +112,7 @@ const EditPost = () => {
                 <Editor content={getPost.data?.content} setContent={setContent} editing />
               </label>
 
-              <div className='flex flex-col-reverse gap-5 md:flex-row justify-between'>
+              <div className='flex flex-col-reverse gap-3 md:flex-row'>
                 <label className='flex items-center gap-5'>
                   Publish:
                   <Checkbox
@@ -120,19 +123,24 @@ const EditPost = () => {
                   />
                 </label>
 
-                <label>
-                  Cover Photo:
-                  <Input
-                    type='file'
-                    placeholder='Select Image'
-                    border={'none'}
-                    padding={'none'}
-                    onChange={(e) => {
-                      e.target.files && setImage(e.target.files[0]);
-                    }}
-                  />
+                <label className='flex items-center gap-3'>
+                  Featured:
+                  <Checkbox {...register('featured')} size={'lg'} borderColor={'#5f5e5e'} />
                 </label>
               </div>
+
+              <label>
+                Cover Photo:
+                <Input
+                  type='file'
+                  placeholder='Select Image'
+                  border={'none'}
+                  padding={'none'}
+                  onChange={(e) => {
+                    e.target.files && setImage(e.target.files[0]);
+                  }}
+                />
+              </label>
 
               <Button type='submit' my={5} className='w-32' isLoading={loading}>
                 Submit

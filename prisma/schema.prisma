@@ -46,6 +46,7 @@ model Post {
   image     String   @db.Text
   excerpt   String   @db.Text
   content   String   @db.LongText
+  featured  Boolean  @default(false)
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String

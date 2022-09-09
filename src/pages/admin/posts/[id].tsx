@@ -74,12 +74,12 @@ const Post = () => {
             </div> */}
           </div>
 
-          <h1 className='heading-2 md:text-center lg:px-10'>{data?.title}</h1>
-          <p className=' text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
+          <h1 className='heading-1 md:text-center lg:px-10'>{data?.title}</h1>
+          <p className='heading-4  md:text-center lg:px-10'>{data?.excerpt}</p>
         </VStack>
 
         {/* Content */}
-        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 0, md: 8, xl: '10%' }}>
+        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 2, md: 8, xl: '10%' }}>
           <HStack justify='space-between' align='flex-start' gap={8}>
             {/* <Divider
               display={{ base: 'none', md: 'flex' }}
@@ -88,7 +88,7 @@ const Post = () => {
               height={40}
               borderColor='#373435'
             /> */}
-            <div id='body-admin' className='w-full text-left'></div>
+            <div id='body-admin' className='w-full'></div>
           </HStack>
         </VStack>
       </section>

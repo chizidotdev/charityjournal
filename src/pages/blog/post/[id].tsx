@@ -43,7 +43,7 @@ const Post = () => {
   if (data) {
     post = (
       <>
-        <VStack align='center' px={{ base: 2, md: 12, lg: '14%' }}>
+        <VStack align='center' px={{ base: 0, md: 12, lg: '14%' }}>
           <div className='relative self-center w-full h-52 md:h-60 lg:h-72 rounded-md overflow-hidden'>
             <Image src={data.image || ''} alt='' layout='fill' objectFit='cover' />
           </div>
@@ -63,7 +63,7 @@ const Post = () => {
           </div>
 
           <h1 className='heading-2 md:text-center lg:px-10'>{data.title}</h1>
-          <p className='heading-4 text-gray-700 md:text-center lg:px-10'>{data?.excerpt}</p>
+          <p className='heading-4 text-gray-900 md:text-center lg:px-10'>{data?.excerpt}</p>
         </VStack>
 
         {/* Content */}

@@ -8,6 +8,7 @@ export const defaultPostSelect = Prisma.validator<Prisma.PostSelect>()({
   title: true,
   content: true,
   image: true,
+  featured: true,
   published: true,
   author: true,
   authorId: true,
@@ -81,6 +82,7 @@ export const protectedPostRouter = createProtectedRouter()
       content: z.string(),
       authorId: z.string(),
       published: z.boolean(),
+      featured: z.boolean(),
     }),
     async resolve({ input, ctx }) {
       return await ctx.prisma.post.update({
@@ -100,6 +102,7 @@ export const protectedPostRouter = createProtectedRouter()
       content: z.string(),
       authorId: z.string(),
       published: z.boolean(),
+      featured: z.boolean(),
     }),
     async resolve({ input, ctx }) {
       console.log('input====', input);

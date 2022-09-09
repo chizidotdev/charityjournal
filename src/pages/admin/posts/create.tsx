@@ -16,6 +16,7 @@ interface FormValues {
   content: string;
   excerpt: string;
   published: boolean;
+  featured: boolean;
   authorId: string;
   image: string;
 }
@@ -47,6 +48,7 @@ const CreatePost = () => {
     const input: FormValues = {
       title: data.title,
       published: data.published,
+      featured: data.featured,
       excerpt: data.excerpt,
       content,
       image: imageUrl,
@@ -89,24 +91,29 @@ const CreatePost = () => {
                 <Editor setContent={setContent} />
               </label>
 
-              <div className='flex flex-col-reverse gap-5 md:flex-row justify-between'>
-                <label className='flex items-center gap-5'>
+              <label>
+                Cover Photo:
+                <Input
+                  required
+                  type='file'
+                  placeholder='Select Image'
+                  border={'none'}
+                  padding={'none'}
+                  onChange={(e) => {
+                    e.target.files && setImage(e.target.files[0]);
+                  }}
+                />
+              </label>
+
+              <div className='flex flex-col-reverse gap-10 md:flex-row'>
+                <label className='flex items-center gap-3'>
                   Publish:
                   <Checkbox {...register('published')} size={'lg'} borderColor={'#5f5e5e'} />
                 </label>
 
-                <label>
-                  Cover Photo:
-                  <Input
-                    required
-                    type='file'
-                    placeholder='Select Image'
-                    border={'none'}
-                    padding={'none'}
-                    onChange={(e) => {
-                      e.target.files && setImage(e.target.files[0]);
-                    }}
-                  />
+                <label className='flex items-center gap-3'>
+                  Featured:
+                  <Checkbox {...register('featured')} size={'lg'} borderColor={'#5f5e5e'} />
                 </label>
               </div>
 
