@@ -55,7 +55,7 @@ const Post = () => {
     post = (
       <section className='my-10'>
         {/* Heading */}
-        <VStack align='center' px={{ base: 2, md: 12, lg: '14%' }}>
+        <VStack align='center' px={{ md: 12, lg: '14%' }}>
           <div className='relative self-center w-full h-52 md:h-60 lg:h-72 rounded-md overflow-hidden'>
             <Image src={data.image} alt='' layout='fill' objectFit='cover' />
           </div>
@@ -79,7 +79,7 @@ const Post = () => {
         </VStack>
 
         {/* Content */}
-        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 2, md: 8, xl: '10%' }}>
+        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ md: 8, xl: '10%' }}>
           <HStack justify='space-between' align='flex-start' gap={8}>
             {/* <Divider
               display={{ base: 'none', md: 'flex' }}
@@ -88,7 +88,7 @@ const Post = () => {
               height={40}
               borderColor='#373435'
             /> */}
-            <div id='body-admin' className='w-full'></div>
+            <div id='body-admin' className='w-full lg:px-20'></div>
           </HStack>
         </VStack>
       </section>
