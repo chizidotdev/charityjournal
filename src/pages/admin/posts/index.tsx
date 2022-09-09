@@ -9,6 +9,7 @@ import {
   Tbody,
   Td,
   Text,
+  Checkbox,
 } from '@chakra-ui/react';
 import { Post } from '@prisma/client';
 import { useSession } from 'next-auth/react';
@@ -53,6 +54,7 @@ const Posts = () => {
                   <Tr>
                     <Th isNumeric>id</Th>
                     <Th>title</Th>
+                    <Th>featured</Th>
                     <Th>created_at</Th>
                     <Th>updated_at</Th>
                     <Th>status</Th>
@@ -105,7 +107,9 @@ interface PostItemProps {
 
 const PostItem = ({ post }: PostItemProps) => {
   const deletePost = trpc.useMutation(['protected.deletePost']);
+  const updateFeatured = trpc.useMutation(['protected.updateFeatured']);
   const [open, setOpen] = useState(false);
+  const [isFeatured, setIsFeatured] = useState(post.featured);
 
   const handleDelete = () => {
     deletePost.mutate(
@@ -113,6 +117,21 @@ const PostItem = ({ post }: PostItemProps) => {
       {
         onSuccess: () => {
           toast('User deleted successfully', { type: 'success' });
+        },
+        onError: (error) => {
+          toast(error.message, { type: 'error' });
+        },
+      }
+    );
+  };
+
+  const handleUpdateFeatured = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateFeatured.mutate(
+      { id: post.id, featured: event.target.checked },
+      {
+        onSuccess: ({ featured }) => {
+          setIsFeatured(featured);
+          toast('Post updated successfully', { type: 'success' });
         },
         onError: (error) => {
           toast(error.message, { type: 'error' });
@@ -136,6 +155,18 @@ const PostItem = ({ post }: PostItemProps) => {
           <Link href='/admin/posts/[id]' as={`/admin/posts/${post.id}`}>
             <h2 className='cursor-pointer max-w-xs truncate hover:underline'>{post.title}</h2>
           </Link>
+        </Td>
+        <Td className=''>
+          <div
+            // onClick={() => setOpen(true)}
+            className='cursor-pointer text-center hover:text-[#1db3a6]'
+          >
+            <Checkbox
+              color={'#1db3a6'}
+              isChecked={isFeatured}
+              onChange={(e) => handleUpdateFeatured(e)}
+            />
+          </div>
         </Td>
         <Td>
           {post.createdAt.toDateString()}, {post.createdAt.toLocaleTimeString()}

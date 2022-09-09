@@ -76,7 +76,7 @@ const Post = () => {
               height={40}
               borderColor='#373435'
             /> */}
-            <div id='body-user' className='w-full md:px-16'></div>
+            <div id='body-user' className='w-full lg:px-16'></div>
           </HStack>
         </VStack>
       </>

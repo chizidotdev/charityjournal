@@ -26,6 +26,19 @@ export const postRouter = createRouter()
       });
     },
   })
+  .query('getFeaturedPublishedPosts', {
+    async resolve({ ctx }) {
+      return await ctx.prisma.post.findMany({
+        where: {
+          featured: true,
+          published: true,
+        },
+        orderBy: {
+          id: 'desc',
+        },
+      });
+    },
+  })
   .query('getPublishedPosts', {
     async resolve({ ctx }) {
       return await ctx.prisma.post.findMany({
@@ -94,6 +107,22 @@ export const protectedPostRouter = createProtectedRouter()
         },
         data: input,
         select: defaultPostSelect,
+      });
+    },
+  })
+  .mutation('updateFeatured', {
+    input: z.object({
+      id: z.number(),
+      featured: z.boolean(),
+    }),
+    async resolve({ input, ctx }) {
+      return await ctx.prisma.post.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          featured: input.featured,
+        },
       });
     },
   })

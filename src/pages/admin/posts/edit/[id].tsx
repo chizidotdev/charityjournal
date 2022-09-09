@@ -116,7 +116,7 @@ const EditPost = () => {
                 <label className='flex items-center gap-5'>
                   Publish:
                   <Checkbox
-                    defaultChecked={getPost.data?.published}
+                    checked={getPost.data?.published}
                     {...register('published')}
                     size={'lg'}
                     borderColor={'#5f5e5e'}
@@ -125,7 +125,12 @@ const EditPost = () => {
 
                 <label className='flex items-center gap-3'>
                   Featured:
-                  <Checkbox {...register('featured')} size={'lg'} borderColor={'#5f5e5e'} />
+                  <Checkbox
+                    checked={getPost.data?.featured}
+                    {...register('featured')}
+                    size={'lg'}
+                    borderColor={'#5f5e5e'}
+                  />
                 </label>
               </div>
 
