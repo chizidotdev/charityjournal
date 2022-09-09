@@ -3,7 +3,6 @@ import Image from 'next/image';
 import SideBar from '../components/Sidebar';
 import Trending, { Content } from '../components/Blog';
 import Layout from '../components/UI/MainLayout';
-import { useSession } from 'next-auth/react';
 import { Divider, Flex } from '@chakra-ui/react';
 import { trpc } from '../utils/trpc';
 import Link from 'next/link';

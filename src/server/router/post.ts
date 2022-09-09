@@ -31,6 +31,9 @@ export const postRouter = createRouter()
         where: {
           published: true,
         },
+        orderBy: {
+          id: 'desc',
+        },
       });
     },
   })

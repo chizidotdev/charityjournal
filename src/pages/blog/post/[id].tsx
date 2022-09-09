@@ -67,7 +67,7 @@ const Post = () => {
         </VStack>
 
         {/* Content */}
-        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 0, md: 8, xl: '10%' }}>
+        <VStack py={{ base: 12, md: 20, lg: 20 }} px={{ base: 2, md: 8, xl: '10%' }}>
           <HStack justify='space-between' align='flex-start' gap={8}>
             {/* <Divider
               display={{ base: 'none', md: 'flex' }}
@@ -76,7 +76,7 @@ const Post = () => {
               height={40}
               borderColor='#373435'
             /> */}
-            <div id='body-user' className='w-full'></div>
+            <div id='body-user' className='w-full md:px-16'></div>
           </HStack>
         </VStack>
       </>
